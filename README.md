@@ -37,3 +37,9 @@ location ~ \.php$ {
     include fastcgi_params;
 }
 ```
+
+### 关于public/index.php的改动
+
+* 先在本地安装好mongodb数据库及php mongodb扩展，第一次运行时取消插入数据部分代码的注释
+* 第二次及以后注释掉插入数据部分代码，避免重复插入
+
