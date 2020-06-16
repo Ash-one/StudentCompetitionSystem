@@ -12,7 +12,8 @@ class IndexController extends Yaf_Controller_Abstract {
      */
     public function init() {
 		$this->getView()->assign("header", "Yaf Example");
-	}
+		$admin_model = new Dao_AdminModel();
+    }
 
 	/** 
      * 默认动作
