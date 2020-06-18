@@ -16,14 +16,14 @@
 
 ## 竞赛数据
 
-接口地址：http://api.gy5461.xyz/competitios/search
-支持格式：json 
-请求方法：*GET* 
-请求示例：
-http://api.gy5461.xyz/competitios/search
-http://api.gy5461.xyz/competitios/search/year/2019
-http://api.gy5461.xyz/competitios/search/keyword/cuc
-http://api.gy5461.xyz/competitios/search/year/2019/keyword/cuc
+接口地址：http://api.gy5461.xyz/competitios/search 
+支持格式：json  
+请求方法：*GET*  
+请求示例： 
+http://api.gy5461.xyz/competitios/search 
+http://api.gy5461.xyz/competitios/search/year/2019 
+http://api.gy5461.xyz/competitios/search/keyword/cuc 
+http://api.gy5461.xyz/competitios/search/year/2019/keyword/cuc 
 
 
 - 请求参数： 
@@ -55,14 +55,14 @@ http://api.gy5461.xyz/competitios/search/year/2019/keyword/cuc
 ## 学生数据
 ### 学生数据一级界面
 
-接口地址：http://api.gy5461.xyz/students/search/
-支持格式：json 
-请求方法：*GET*
-请求示例：
-http://api.gy5461.xyz/students/search/
-http://api.gy5461.xyz/students/search/year/2019
-http://api.gy5461.xyz/students/search/keyword/Kevin
-http://api.gy5461.xyz/students/search/year/2019/keyword/Kevin
+接口地址：http://api.gy5461.xyz/students/search/ 
+支持格式：json  
+请求方法：*GET* 
+请求示例： 
+http://api.gy5461.xyz/students/search/ 
+http://api.gy5461.xyz/students/search/year/2019 
+http://api.gy5461.xyz/students/search/keyword/Kevin 
+http://api.gy5461.xyz/students/search/year/2019/keyword/Kevin 
 
 
 - 请求参数： 
@@ -86,12 +86,12 @@ http://api.gy5461.xyz/students/search/year/2019/keyword/Kevin
 |   num_awards |    int    |   总获奖次数     |
 
 ### 学生数据二级界面
-接口地址：http://api.gy5461.xyz/students/query/
-支持格式：json 
-请求方法：*GET* 
-请求示例：
-http://api.gy5461.xyz/students/query/name/Kevin
-http://api.gy5461.xyz/students/query/name/Kevin/keyword/一等奖
+接口地址：http://api.gy5461.xyz/students/query/ 
+支持格式：json  
+请求方法：*GET*  
+请求示例： 
+http://api.gy5461.xyz/students/query/name/Kevin 
+http://api.gy5461.xyz/students/query/name/Kevin/keyword/一等奖 
 
 
 - 请求参数： 
@@ -118,14 +118,14 @@ http://api.gy5461.xyz/students/query/name/Kevin/keyword/一等奖
 ----
 ## 学校数据
 ### 学校数据一级界面
-接口地址：http://api.gy5461.xyz/schools/search
-支持格式：json 
-请求方法：*GET* 
+接口地址：http://api.gy5461.xyz/schools/search 
+支持格式：json  
+请求方法：*GET*  
 请求示例：
-http://api.gy5461.xyz/schools/search/
-http://api.gy5461.xyz/schools/search/year/2019
-http://api.gy5461.xyz/schools/search/keyword/传媒
-http://api.gy5461.xyz/schools/search/year/2019/keyword/大学
+http://api.gy5461.xyz/schools/search/ 
+http://api.gy5461.xyz/schools/search/year/2019 
+http://api.gy5461.xyz/schools/search/keyword/传媒 
+http://api.gy5461.xyz/schools/search/year/2019/keyword/大学 
 
 
 - 请求参数： 
@@ -148,12 +148,12 @@ http://api.gy5461.xyz/schools/search/year/2019/keyword/大学
 |   num_aw_group      |   int      |  总团体奖数      |
 
 ### 学校数据二级界面
-接口地址：http://api.gy5461.xyz/schools/query
-支持格式：json 
-请求方法：*GET* 
-请求示例：
-http://api.gy5461.xyz/schools/query/school/CUC
-http://api.gy5461.xyz/schools/query/school/CUC/keyword/大学
+接口地址：http://api.gy5461.xyz/schools/query 
+支持格式：json  
+请求方法：*GET*  
+请求示例： 
+http://api.gy5461.xyz/schools/query/school/CUC 
+http://api.gy5461.xyz/schools/query/school/CUC/keyword/大学 
 
 
 - 请求参数： 
@@ -178,12 +178,12 @@ http://api.gy5461.xyz/schools/query/school/CUC/keyword/大学
 ---
 ## 平台数据
 
-接口地址：http://api.gy5461.xyz/platform/search
-支持格式：json 
-请求方法：*GET*  
-请求示例：
-http://api.gy5461.xyz/platform/search/
-http://api.gy5461.xyz/platform/search/year/2019
+接口地址：http://api.gy5461.xyz/platform/search 
+支持格式：json  
+请求方法：*GET*   
+请求示例： 
+http://api.gy5461.xyz/platform/search/ 
+http://api.gy5461.xyz/platform/search/year/2019 
 
 
 - 请求参数： 
