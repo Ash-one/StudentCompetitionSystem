@@ -8,7 +8,7 @@ class Db_Mongodb {
     protected $host = 'localhost';
     protected $port = '27017';
 
-    public $manager = null;
+    protected $manager = null;
     protected static $connection = [];
 
     /**

@@ -12,7 +12,12 @@ class IndexController extends Yaf_Controller_Abstract {
      */
     public function init() {
 		$this->getView()->assign("header", "Yaf Example");
-		$admin_model = new Dao_AdminModel();
+		$administrator_model = new Dao_AdministratorModel();
+		$student_model = new Dao_StudentModel();
+		$school_model = new Dao_SchoolModel();
+		$competition_model = new Dao_CompetitionModel();
+		$match_model = new Dao_MatchModel();
+		$award_model = new Dao_AwardModel();
     }
 
 	/** 

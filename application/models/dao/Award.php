@@ -1,12 +1,11 @@
 <?php
-
 /**
- * AdminModel
+ * AwardModel
  * @author guoyi
  */
-class Dao_AdminModel extends Db_Mongodb {
+class Dao_AwardModel extends Db_Mongodb {
     /**
-     * Db_AdminModel constructor.
+     * Db_AwardModel constructor.
      */
     public function __construct()
     {
@@ -16,13 +15,14 @@ class Dao_AdminModel extends Db_Mongodb {
         $bulk = new MongoDB\Driver\BulkWrite;
         $bulk->delete([]);
         //插入数据
-        $bulk->insert(["administrator_name"=>"admin", "password"=>"24819090"]);
-        $this->manager->executeBulkWrite('student_competition_system.administrator', $bulk);
+        $bulk->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,
+            "student_object_id"=>"", "school_object_id"=>"", "award_rank"=>1]);
+        $this->manager->executeBulkWrite('student_competition_system.award', $bulk);
 
         //查询结果
         $filter = [];
         $query = new MongoDB\Driver\Query($filter);
-        $cursor = $this->manager->executeQuery('student_competition_system.administrator', $query);
+        $cursor = $this->manager->executeQuery('student_competition_system.award', $query);
 
         foreach ($cursor as $document) {
             print_r($document);
