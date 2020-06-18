@@ -43,3 +43,19 @@ location ~ \.php$ {
 * 先在本地安装好mongodb数据库及php mongodb扩展，第一次运行时取消插入数据部分代码的注释
 * 第二次及以后注释掉插入数据部分代码，避免重复插入
 
+### 将数据库小测试迁移到application
+
+新增了：
+
+* library/db/Mongodb.php
+  * 对mongodb php扩展的简单封装
+* models/dao/Admin.php
+  * 向数据库中导入administrator的相关信息
+  * 在数据库student_competition_system的administrator集合下插入一条数据
+
+修改了:
+
+* public/index.php
+  * 去掉了数据库小测试的代码
+* controllers/Index.php
+  * 在init中实例化了一个Dao_AdminModel对象，以调用向数据库中导入administrator的相关信息的代码
