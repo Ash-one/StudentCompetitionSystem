@@ -10,8 +10,9 @@
  */
 
 return [
+	// 测试用
 	'index' => [
-		'/:name',
+		'name/:name',
 		['controller' => 'Index', 'action' => 'index']
 	],
 ];
