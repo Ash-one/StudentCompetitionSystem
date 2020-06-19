@@ -12,5 +12,6 @@ class ErrorController extends Yaf_Controller_Abstract {
 		//1. assign to view engine
 		$this->getView()->assign("exception", $exception);
 		//5. render by Yaf 
+		return TRUE;
 	}
 }
