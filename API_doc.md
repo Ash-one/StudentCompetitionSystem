@@ -1,6 +1,8 @@
 # API 接口设计参考文档
 
 ## 目录
+
+#### - [上传文件接口](#上传文件接口)
 #### - [竞赛数据接口](#竞赛数据)
 + [一级界面接口](#竞赛数据一级界面)
 + [二级界面接口](#竞赛数据二级界面)
@@ -14,8 +16,16 @@
 #### - [状态码](#状态码)
 
 
+## 上传文件接口
+接口地址：http://api.gy5461.xyz/upload   
+支持格式：json  
+请求方法：*POST*  
+请求示例：  
+http://api.gy5461.xyz/upload 
 
 
+
+---
 ## 竞赛数据
 ### 竞赛数据一级界面
 接口地址：http://api.gy5461.xyz/competitions/overview   
@@ -54,7 +64,6 @@ http://api.gy5461.xyz/competitions/overview/year/2019/keyword/cuc
 {
     "status": "0",
     "msg"   : "ok",
-    "keyword": "",
     "result": [
         {
             "name_cmpt" : "全国大学生工程训练赛",
@@ -100,7 +109,7 @@ http://api.gy5461.xyz/competitions/info/name/全国大学生工程训练赛
 |   参数名称        |   类型      | 说明          |
 |   ----           |   :----:   | ----         |
 |   year           |   string   |   年份        |
-|   holdingtime    |   string   |   开始：XXXX.XX.XX，结束：-|
+|   holdingtime    |   string   |   举办时间：XXXX.XX.XX-XXXX.XX.XX|
 |   num_schools    |   int      |   总参赛学校数 | 
 |   num_matchs     |   int      |   包含项目数   |
 |   num_students   |   int      |   总参赛人数   |
@@ -160,7 +169,6 @@ http://api.gy5461.xyz/competitions/detail/name/全国大学生工程训练赛/ke
 {
     "status" : "0",
     "msg"    : "ok",
-    "keyword": "小车",
     "result" : [
         {
             "name" : "巡线小车竞速",
@@ -218,7 +226,6 @@ http://api.gy5461.xyz/students/overview/year/2019/keyword/Kevin
 {
     "status" : "0",
     "msg"    : "ok",
-    "keyword": "",
     "result" : [
         {
             "name" : "Kevin",
@@ -318,7 +325,7 @@ http://api.gy5461.xyz/students/detail/name/Kevin/keyword/
 |   name_cmpt      |   string   |   竞赛名称                |
 |   year           |   string   |   年份                    |
 |   state          |   string   |   进行中or已结束           |
-|   holdingtime    |   string   |   开始：XXXX.XX.XX，结束：-|
+|   holdingtime    |   string   |   举办时间：XXXX.XX.XX-XXXX.XX.XX|
 |   match          |   string   |   项目名称                |
 |   award          |   string   |   获奖情况                |
 |   award_type     |   string   |   项目类别                |
@@ -328,7 +335,6 @@ http://api.gy5461.xyz/students/detail/name/Kevin/keyword/
 {
     "status" : "0",
     "msg"    : "ok",
-    "keyword": "Kevin",
     "result" :[
         {
             "name_cmpt" : "全国大学生扯淡锦标赛",
@@ -391,7 +397,6 @@ http://api.gy5461.xyz/schools/overview/year/2019/keyword/大学
 {
     "status" : "0",
     "msg"    : "ok",
-    "keyword":""
     "result" :[
         {
             "school" : "中国加里敦大学",
@@ -491,7 +496,6 @@ http://api.gy5461.xyz/schools/detail/name/CUC/keyword/大学
 {
     "status" : "0",
     "msg"    : "ok",
-    "keyword":"大学"
     "result" :[
         {
             "name"       : "Kevin",
@@ -566,26 +570,33 @@ http://api.gy5461.xyz/platform/overview/year/2019
 
 ---
 ## 状态码
-status |  msg
+status |  状态说明
 ----   |  ----
 0      |  ok
 1      |  error
 
 
 ### 系统错误码
-error code |    msg
+code       |    error_msg
 ----       |    ----
 101        |    接口目前不可用
 
 
 ### API 错误码
-error code |    msg
+code       |    error_msg
 ----       |    ----
 201        |    必需参数为空
 202        |    搜索结果不存在
+203        |    json编码错误
 
-
-
+- 响应示例：
+```
+{
+    "status" : "1",
+    "code"   : "201",
+    "msg" : "必需参数为空"
+}
+```
 
 
 
