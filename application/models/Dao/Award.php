@@ -11,13 +11,22 @@ class Dao_AwardModel extends Db_Mongodb {
     {
         parent::__construct();
 
-        //清空集合administrator
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->delete([]);
-        //插入数据
-        $bulk->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,
-            "student_object_id"=>"", "school_object_id"=>"", "award_rank"=>1]);
-        $this->manager->executeBulkWrite('student_competition_system.award', $bulk);
+        //设置集合
+        $this->collection = 'award';
+        //设置字段
+        $this->fields = [
+            'competition_object_id'=>'',
+            'match_object_id'=>'',
+            'award_type'=>'',
+            'student_object_id'=>'',
+            'school_object_id'=>'',
+            'award_rank'=>''
+        ];
+        if($this->count() == 0) {
+            //空集合插入记录
+            $this->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,
+                "student_object_id"=>"", "school_object_id"=>"", "award_rank"=>1]);
+        }
 
         //查询结果
         $filter = [];

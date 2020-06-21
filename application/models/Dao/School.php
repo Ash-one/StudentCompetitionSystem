@@ -11,13 +11,20 @@ class Dao_SchoolModel extends Db_Mongodb {
     {
         parent::__construct();
 
-        //清空集合administrator
-        $bulk = new MongoDB\Driver\BulkWrite;
-        $bulk->delete([]);
-        //插入数据
-        $bulk->insert(["school_name"=>"中国传媒大学", "school_competition_details"=>[], "school_award_details"=>[],
-            "school_students"=>[]]);
-        $this->manager->executeBulkWrite('student_competition_system.school', $bulk);
+        //设置集合
+        $this->collection = 'school';
+        //设置字段
+        $this->fields = [
+            'school_name'=>'',
+            'school_competition_details'=>[],
+            'school_award_details'=>[],
+            'school_students'=>[]
+        ];
+        if($this->count() == 0){
+            //空集合插入记录
+            $this->insert(["school_name"=>"中国传媒大学", "school_competition_details"=>[], "school_award_details"=>[],
+                "school_students"=>[]]);
+        }
 
         //查询结果
         $filter = [];
