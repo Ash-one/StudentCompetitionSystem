@@ -95,6 +95,22 @@ class Db_Mongodb {
     }
 
     /**
+     * 将传入的字符串转换成类型为MongoDB\BSON\ObjectID的对象返回，用于_id在数据库中的匹配
+     * @param     string           $_id
+     * @return    MongoDB\BSON\ObjectID
+     */
+    public function makeObjectId($_id = ''){
+        try{
+            $oid = new MongoDB\BSON\ObjectID($_id);
+        }
+        catch (Exception $e){
+            $oid = false;
+        }
+
+        return $oid;
+    }
+
+    /**
      * 删除数据
      * @param  array  $match   匹配条件 参考查询、修改匹配条件语法
      * @param  array  $options limit 为0 只删除符合条件的一条记录；为1则删除所有匹配记录
@@ -111,6 +127,16 @@ class Db_Mongodb {
         if(isset($options['limit']) && !in_array($options['limit'], [0,1]))
         {
             throw new Exception('Invalid limit option.');
+        }
+
+        //将主键的值从字符串类型转为MongoDB\BSON\ObjectID类型
+        if(isset($match[$this->primary_key])){
+            $oid = $this->makeObjectId($match[$this->primary_key]);
+            if(false === $oid)
+            {
+                return false;
+            }
+            $match[$this->primary_key] = $oid;
         }
 
         $bulk = new MongoDB\Driver\BulkWrite;

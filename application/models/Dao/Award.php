@@ -22,6 +22,8 @@ class Dao_AwardModel extends Db_Mongodb {
             'school_object_id'=>'',
             'award_rank'=>''
         ];
+        //设置主键字段
+        $this->primary_key = '_id';
         if($this->count() == 0) {
             //空集合插入记录
             $this->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,

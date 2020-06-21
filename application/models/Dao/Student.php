@@ -23,6 +23,8 @@ class Dao_StudentModel extends Db_Mongodb {
             'student_competition_details'=>[],
             'student_award_details'=>[]
         ];
+        //设置主键字段
+        $this->primary_key = '_id';
         if($this->count() == 0){
             //空集合插入记录
             $this->insert(["student_name"=>"姜小兰", "student_id"=>"4010101", "student_grade"=>"41",

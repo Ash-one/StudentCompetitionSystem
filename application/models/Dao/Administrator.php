@@ -19,6 +19,8 @@ class Dao_AdministratorModel extends Db_Mongodb {
             'administrator_name'=>'',
             'password'=>''
         ];
+        //设置主键字段
+        $this->primary_key = '_id';
         if($this->count() == 0)
         {
             //空集合插入记录
