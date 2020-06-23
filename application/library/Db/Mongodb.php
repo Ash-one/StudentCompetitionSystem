@@ -125,7 +125,7 @@ class Db_Mongodb {
      * @param  array  $options limit 为0 只删除符合条件的一条记录；为1则删除所有匹配记录
      * @return [type]          [description]
      */
-    public function delete(array $match, $options = ['limit'=>0]){
+    public function delete(array $match, $options = ['limit' => 0]){
         try {
             //若传入匹配条件为空
             if (empty($match)) {
@@ -277,7 +277,7 @@ class Db_Mongodb {
     }
 
     /**
-     * 通过主键 _id 修改信息
+     * 通过主键 _id 修改记录字段值
      * @param     string           $_id
      * @param     array            $update ['$set' => ['name' => 'emma', 'age' => 12]]
      *                                     ['$inc' => ['num' => 10, 'age' => -12]]
@@ -338,7 +338,7 @@ class Db_Mongodb {
      * 获取一条记录
      * @param     array            $filter  [description]
      * @param     array            $options [description]
-     * @return    [array]                    [description]
+     * @return    array                     [description]
      */
     public function queryOne(array $filter, $options = []){
         if(empty($options) || !isset($options['limit']) || $options['limit'] != 1) {
@@ -387,6 +387,7 @@ class Db_Mongodb {
      */
     public function getInfoById($_id, array $fields = []){
         $newOptions = [];
+        $_id = $this->makeObjectId($_id);
 
         $where = [
             $this->primary_key => $_id
