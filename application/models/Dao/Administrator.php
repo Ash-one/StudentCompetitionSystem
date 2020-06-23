@@ -19,23 +19,21 @@ class Dao_AdministratorModel extends Db_Mongodb {
             'administrator_name'=>'',
             'password'=>''
         ];
-        //设置主键字段
-        $this->primary_key = '_id';
+
         if($this->count() == 0)
         {
             //空集合插入记录
             $this->insert(["administrator_name"=>"admin", "password"=>"24819090"]);
         }
 
+        $this->update(['administrator_name'=>'admin'],['password'=>'123456']);
+
         //查询结果
         $filter = [];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $this->manager->executeQuery('student_competition_system.administrator', $query);
-
-        foreach ($cursor as $document) {
+        $result = $this->query($filter);
+        foreach ($result as $document) {
             print_r($document);
         }
-
     }
 }
 ?>

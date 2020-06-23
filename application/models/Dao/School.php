@@ -20,8 +20,7 @@ class Dao_SchoolModel extends Db_Mongodb {
             'school_award_details'=>[],
             'school_students'=>[]
         ];
-        //设置主键字段
-        $this->primary_key = '_id';
+
         if($this->count() == 0){
             //空集合插入记录
             $this->insert(["school_name"=>"中国传媒大学", "school_competition_details"=>[], "school_award_details"=>[],
@@ -30,10 +29,8 @@ class Dao_SchoolModel extends Db_Mongodb {
 
         //查询结果
         $filter = [];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $this->manager->executeQuery('student_competition_system.school', $query);
-
-        foreach ($cursor as $document) {
+        $result = $this->query($filter);
+        foreach ($result as $document) {
             print_r($document);
         }
 

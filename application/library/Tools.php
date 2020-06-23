@@ -1521,13 +1521,19 @@ class Tools {
         }
     }
 
-    public static function object_array($array){       
+    /**
+     * 将每个object类型转换为数组类型
+     * @param $array
+     * @return array
+     */
+    public static function object_array($array){
         if(is_object($array)) {                                                                                      
             $array = (array)$array;                                                        
         }
         if(is_array($array)){   
             foreach($array as $key=>$value) {
-                $array[$key] = self::object_array($value);                             
+                //递归转换
+                $array[$key] = self::object_array($value);
             }
         }   
         return $array;    

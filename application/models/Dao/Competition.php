@@ -23,8 +23,7 @@ class Dao_CompetitionModel extends Db_Mongodb {
             'competition_award_details'=>[],
             'competition_match_items'=>''
         ];
-        //设置主键字段
-        $this->primary_key = '_id';
+
         if($this->count() == 0){
             //空集合插入记录
             $this->insert(["competition_name"=>"北京市大学生运动会", "competition_start_time"=>"1580864400", "competition_end_time"=>"1581238800",
@@ -33,10 +32,8 @@ class Dao_CompetitionModel extends Db_Mongodb {
 
         //查询结果
         $filter = [];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $this->manager->executeQuery('student_competition_system.competition', $query);
-
-        foreach ($cursor as $document) {
+        $result = $this->query($filter);
+        foreach ($result as $document) {
             print_r($document);
         }
 

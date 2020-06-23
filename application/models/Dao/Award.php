@@ -22,8 +22,7 @@ class Dao_AwardModel extends Db_Mongodb {
             'school_object_id'=>'',
             'award_rank'=>''
         ];
-        //设置主键字段
-        $this->primary_key = '_id';
+
         if($this->count() == 0) {
             //空集合插入记录
             $this->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,
@@ -32,10 +31,8 @@ class Dao_AwardModel extends Db_Mongodb {
 
         //查询结果
         $filter = [];
-        $query = new MongoDB\Driver\Query($filter);
-        $cursor = $this->manager->executeQuery('student_competition_system.award', $query);
-
-        foreach ($cursor as $document) {
+        $result = $this->query($filter);
+        foreach ($result as $document) {
             print_r($document);
         }
 
