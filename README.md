@@ -11,7 +11,7 @@
 >     崔明
 
 ## ussage
-### 服务器配置（以 nginx 为例）
+### API 服务器配置（以 nginx 为例）
 ``` ini
 # $YOUR_PATH 为 StudentCompetitionSystem 所在的绝对路径
 root $YOUR_PATH/StudentCompetitionSystem/public/;

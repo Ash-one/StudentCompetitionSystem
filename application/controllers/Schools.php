@@ -5,23 +5,21 @@
  * @desc schools 控制器
  */
 class SchoolsController extends JsonControllerAbstract {
+    private $schoolService;
+
     public function init() {
-		parent::init();
+        parent::init();
+        
+        $schoolService = Dao_SchoolModel::getInstance();
     }
 
     /**
-     * @desc Action search，返回（搜索过的）学校一级界面数据
+     * @desc Action getOverview，返回学校一级界面数据
      *
      * @return FLASE
      */
-	public function searchAction() {
+	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray();
-        
-        // 获取参数    
-        $year = $this->getRequest()->getParam('year');
-        $keyword = urldecode($this->getRequest()->getParam('keyword'));
-        $result['year'] = $year;
-        $result['keyword'] = $keyword;
 
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -80,11 +78,7 @@ class SchoolsController extends JsonControllerAbstract {
         
         // 获取参数
         $name = urldecode($this->getRequest()->getParam('name'));
-        $year = $this->getRequest()->getParam('year');
-        $keyword = urldecode($this->getRequest()->getParam('keyword'));
         $result['name'] = $name;
-        $result['yaer'] = $year;
-        $result['keyword'] = $keyword;
      
         if ($name != null) {
 

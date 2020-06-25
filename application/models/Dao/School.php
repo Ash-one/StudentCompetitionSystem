@@ -3,11 +3,11 @@
  * SchoolModel
  * @author guoyi
  */
-class Dao_SchoolModel extends Db_Mongodb {
+class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
     /**
      * Db_SchoolModel constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -28,12 +28,24 @@ class Dao_SchoolModel extends Db_Mongodb {
         }
 
         //查询结果
-        $filter = [];
-        $result = $this->query($filter);
-        foreach ($result as $document) {
-            print_r($document);
+        // $filter = [];
+        // $result = $this->query($filter);
+        // foreach ($result as $document) {
+        //     print_r($document);
+        // }
+    }
+
+    /**
+     * 实现单例模式（线程不安全）
+     *
+     * @return Dao_SchoolModel
+     */
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Dao_SchoolModel();
         }
 
+        return self::$instance;
     }
 }
 ?>

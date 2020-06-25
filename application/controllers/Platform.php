@@ -10,16 +10,12 @@ class PlatformController extends JsonControllerAbstract {
     }
 
     /**
-     * @desc Action search，返回（搜索过的）平台界面数据
+     * @desc Action getOverview，返回平台界面数据
      *
      * @return FLASE
      */
-	public function searchAction() {
+	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray();
-        
-        // 获取参数   
-        $year = $this->getRequest()->getParam('year');
-        $result['year'] = $year;
 
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);

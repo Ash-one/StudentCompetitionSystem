@@ -5,23 +5,21 @@
  * @desc students 控制器
  */
 class StudentsController extends JsonControllerAbstract {
+    private $studentService;
+
     public function init() {
-		parent::init();
+        parent::init();
+        
+        $studentService = Dao_StudentModel::getInstance();
     }
 
     /**
-     * @desc Action search，返回（搜索过的）学生一级界面数据
+     * @desc Action getOverview，返回学生一级界面数据
      *
      * @return FLASE
      */
-	public function searchAction() {
+	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray();
-        
-        // 获取参数    
-        $year = $this->getRequest()->getParam('year');
-        $keyword = urldecode($this->getRequest()->getParam('keyword'));
-        $result['year'] = $year;
-        $result['keyword'] = $keyword;
 
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -38,7 +36,7 @@ class StudentsController extends JsonControllerAbstract {
     }
     
     /**
-     * @desc Action getInfo，返回指定 name 学生的相关信息
+     * @desc Action getInfo，返回指定 id 学生的相关信息
      *
      * @return FLASE
      */
@@ -46,10 +44,9 @@ class StudentsController extends JsonControllerAbstract {
         $result = APIStatusCode::getOkMsgArray();
         
         // 获取参数   
-        $name = urldecode($this->getRequest()->getParam('name'));
-        $result['name'] = $name;
+        $id = $this->getRequest()->getParam('id');
      
-        if ($name != null) {
+        if ($id != null) {
 
 
             // 编码为 json
@@ -71,7 +68,7 @@ class StudentsController extends JsonControllerAbstract {
     }
 
     /**
-     * @desc Action getDetail，返回指定 name 学生的全部奖项详情
+     * @desc Action getDetail，返回指定 id 学生的全部奖项详情
      *
      * @return FLASE
      */
@@ -79,10 +76,7 @@ class StudentsController extends JsonControllerAbstract {
         $result = APIStatusCode::getOkMsgArray();
         
         // 获取参数
-        $name = urldecode($this->getRequest()->getParam('name'));
-        $keyword = urldecode($this->getRequest()->getParam('keyword'));
-        $result['name'] = $name;
-        $result['keyword'] = $keyword;
+        $id = $this->getRequest()->getParam('id');
      
         if ($name != null) {
 

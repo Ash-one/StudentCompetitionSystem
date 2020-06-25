@@ -7,7 +7,7 @@ class Dao_AwardModel extends Db_Mongodb {
     /**
      * Db_AwardModel constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -35,7 +35,14 @@ class Dao_AwardModel extends Db_Mongodb {
         foreach ($result as $document) {
             print_r($document);
         }
+    }
 
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Dao_AwardModel();
+        }
+
+        return self::$instance;
     }
 }
 ?>

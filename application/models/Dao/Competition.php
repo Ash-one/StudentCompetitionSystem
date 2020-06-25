@@ -3,11 +3,11 @@
  * CompetitionModel
  * @author guoyi
  */
-class Dao_CompetitionModel extends Db_Mongodb {
+class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionModel{
     /**
      * Db_CompetitionModel constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -31,12 +31,24 @@ class Dao_CompetitionModel extends Db_Mongodb {
         }
 
         //查询结果
-        $filter = [];
-        $result = $this->query($filter);
-        foreach ($result as $document) {
-            print_r($document);
+        // $filter = [];
+        // $result = $this->query($filter);
+        // foreach ($result as $document) {
+        //     print_r($document);
+        // }
+    }
+
+    /**
+     * 实现单例模式（线程不安全）
+     *
+     * @return Dao_CompetitionModel
+     */
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Dao_CompetitionModel();
         }
 
+        return self::$instance;
     }
 }
 ?>
