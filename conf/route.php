@@ -12,19 +12,29 @@
 return [
 	// Competitions Overview
 	'competitions_overview' => [
-		'competitions/overview/*',
-		['controller' => 'Competitions', 'action' => 'search']
+		'competitions/overview',
+		['controller' => 'Competitions', 'action' => 'getOverview']
 	],
 	// Competitions Info
 	'competitions_info' => [
 		'competitions/info/*',
 		['controller' => 'Competitions', 'action' => 'getInfo']
 	],
+	// Competitions Detail
+	'competitions_detail' => [
+		'competitions/detail/*',
+		['controller' => 'Competitions', 'action' => 'getDetail']
+	],
+	// Competitions ContestantOverview
+	'competitions_ContestantOverview' => [
+		'competitions/contestant/*',
+		['controller' => 'Competitions', 'action' => 'getContestantOverview']
+	],
 
 	// Students Overview
 	'students_overview' => [
-		'students/overview/*',
-		['controller' => 'Students', 'action' => 'search']
+		'students/overview',
+		['controller' => 'Students', 'action' => 'getOverview']
 	],
 	// Students Info
 	'students_info' => [
@@ -39,8 +49,8 @@ return [
 
 	// Schools Overview
 	'schools_overview' => [
-		'schools/overview/*',
-		['controller' => 'Schools', 'action' => 'search']
+		'schools/overview',
+		['controller' => 'Schools', 'action' => 'getOverview']
 	],
 	// Schools Info
 	'schools_info' => [
@@ -55,7 +65,7 @@ return [
 
 	// Platform Overview
 	'platform_overview' => [
-		'platform/overview/*',
-		['controller' => 'Platform', 'action' => 'search']
+		'platform/overview',
+		['controller' => 'Platform', 'action' => 'getOverview']
 	]
 ];

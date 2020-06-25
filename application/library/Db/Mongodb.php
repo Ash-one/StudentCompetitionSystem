@@ -4,7 +4,8 @@
  * @author guoyi
  * @desc MongoDB数据库操作封装
  */
-class Db_Mongodb {
+abstract class Db_Mongodb {
+    protected static $instance = null;
 
     protected $host = 'localhost';
     protected $port = '27017';
@@ -31,9 +32,9 @@ class Db_Mongodb {
     }
 
     /**
-     * 构造函数
+     * 构造函数，禁止外部将之实例化
      */
-    public function __construct()
+    protected function __construct()
     {
         try
         {
@@ -53,6 +54,8 @@ class Db_Mongodb {
             self::log($exception->getMessage());
         }
     }
+
+    abstract static public function getInstance();
 
     /**
      * 连接数据库
