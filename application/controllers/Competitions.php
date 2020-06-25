@@ -5,12 +5,12 @@
  * @desc competitons 控制器
  */
 class CompetitionsController extends JsonControllerAbstract {
-    private $competitionService;
+    private $competitionService = null;
 
     public function init() {
         parent::init();
 
-        $competitionService = Dao_CompetitionModel::getInstance();
+        $this->competitionService = Dao_CompetitionModel::getInstance();
     }
 
     /**
@@ -20,6 +20,8 @@ class CompetitionsController extends JsonControllerAbstract {
      */
 	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray(); 
+
+        $result['result'] = $this->competitionService->getCompetitonOverview();
 
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -48,7 +50,17 @@ class CompetitionsController extends JsonControllerAbstract {
         $year = $this->getRequest()->getParam('year');
      
         if ($name != null && $year != null) {
+            // 获取数据
+            $result['result'] = $this->competitionService->getCompetionInfo($name, $year);
 
+            // 处理搜索结果不存在错误
+            if ($result['result'] === null) {
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::RESULT_NOT_EXIST);
+
+                // 设置 response 并返回
+                $this->jsonResponse->setBody($json);
+                return FALSE;
+            }
 
             // 编码为 json
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -81,7 +93,16 @@ class CompetitionsController extends JsonControllerAbstract {
         $year = $this->getRequest()->getParam('year');
      
         if ($name != null && $year != null) {
+            $result['result'] = $this->competitionService->getCompetitionMatchesDetail($name, $year);
 
+            // 处理搜索结果不存在错误
+            if ($result['result'] === null) {
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::RESULT_NOT_EXIST);
+
+                // 设置 response 并返回
+                $this->jsonResponse->setBody($json);
+                return FALSE;
+            }
 
             // 编码为 json
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -111,10 +132,20 @@ class CompetitionsController extends JsonControllerAbstract {
         
         // 获取参数   
         $name = urldecode($this->getRequest()->getParam('name'));
+        $year = $this->getRequest()->getParam('year');
      
         if ($name != null) {
+            $result['result'] = $this->competitionService->getCompetitionContestantsInfo($name, $year);
 
+            // 处理搜索结果不存在错误
+            if ($result['result'] === null) {
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::RESULT_NOT_EXIST);
 
+                // 设置 response 并返回
+                $this->jsonResponse->setBody($json);
+                return FALSE;
+            }
+            
             // 编码为 json
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
             // 处理 json_encode 错误
@@ -131,5 +162,40 @@ class CompetitionsController extends JsonControllerAbstract {
 		$this->jsonResponse->setBody($json);
 
         return FALSE;
+    }
+
+    public function uploadExcelData() {
+        $result = APIStatusCode::getOkMsgArray();
+
+        // 初始化日志信息
+        $logFile = 'upload_' . date('Y-m-d');
+        $line = '===================' . date('Y-m-d H:i:s') . '===================';
+        Log::writeLog($file, $line, '');
+
+        // 获取参数
+        $file = $this->getRequest()->getFiles()['excel'];
+
+        if ($file != null) {
+            // TODO: 验证文件格式
+
+
+            if ($file["error"] > 0) {
+                // 处理上传文件 error
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::EXCEL_UPLOAD_ERROR, $file['error']);
+                Log::writeLog($file, 'Error: ', $file['error']);
+            }
+            else {
+                // 上传成功
+                Log::writeLog($file, 'Upload: ', $file['name']);
+                Log::writeLog($file, 'Type: ', $file['type']);
+                Log::writeLog($file, 'Size: ', $file['size'] / 1024 . 'kb');
+
+                //TODO: 处理 excel
+            }
+        } else {
+            // 处理必要参数为空
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NULL_PARAMS, " 未能获取到表单 excel 提交的内容");
+            Log::writeLog($file, 'Error: ', "未能获取到表单 excel 提交的内容");
+        }   
     }
 }

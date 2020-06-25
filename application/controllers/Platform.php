@@ -5,8 +5,12 @@
  * @desc platform 控制器
  */
 class PlatformController extends JsonControllerAbstract {
+    private $platformService = null;
+
     public function init() {
-		parent::init();
+        parent::init();
+        
+        $this->platformService = new Service_PlatformModel();
     }
 
     /**
@@ -17,6 +21,7 @@ class PlatformController extends JsonControllerAbstract {
 	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray();
 
+        $result['result'] = $this->platformService->getPlatformOverview();
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
         // 处理 json_encode 错误

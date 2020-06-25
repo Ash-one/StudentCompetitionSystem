@@ -49,4 +49,13 @@ interface Service_ICompetitionModel {
      * @return array 一个 studentInfo 数组
      */
     public function getCompetitionContestantsInfo($name, $year);
+
+    /**
+     * 为 API: /upload 提供服务，将指定 excel 中的数据存入数据库中
+     *
+     * @param string $path excel 文件路径
+     * @param string $fileName excel 文件名
+     * @return null
+     */
+    public function saveData($path, $fileName);
 }

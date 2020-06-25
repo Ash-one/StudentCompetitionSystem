@@ -10,7 +10,7 @@ class SchoolsController extends JsonControllerAbstract {
     public function init() {
         parent::init();
         
-        $schoolService = Dao_SchoolModel::getInstance();
+        $this->schoolService = Dao_SchoolModel::getInstance();
     }
 
     /**
@@ -20,6 +20,8 @@ class SchoolsController extends JsonControllerAbstract {
      */
 	public function getOverviewAction() {
         $result = APIStatusCode::getOkMsgArray();
+
+        $result['result'] = $this->schoolService->getSchoolOverview();
 
         // 编码为 json
         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -48,7 +50,16 @@ class SchoolsController extends JsonControllerAbstract {
         $result['name'] = $name;
      
         if ($name != null) {
+            $result['result'] = $this->schoolService->getSchoolInfo($name);
 
+            // 处理搜索结果不存在错误
+            if ($result['result'] === null) {
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::RESULT_NOT_EXIST);
+
+                // 设置 response 并返回
+                $this->jsonResponse->setBody($json);
+                return FALSE;
+            }
 
             // 编码为 json
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -81,8 +92,17 @@ class SchoolsController extends JsonControllerAbstract {
         $result['name'] = $name;
      
         if ($name != null) {
+            $result['result'] = $this->schoolService->getSchoolAwardsDetail($name);
 
+            // 处理搜索结果不存在错误
+            if ($result['result'] === null) {
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::RESULT_NOT_EXIST);
 
+                // 设置 response 并返回
+                $this->jsonResponse->setBody($json);
+                return FALSE;
+            }
+            
             // 编码为 json
             $json = json_encode($result, JSON_UNESCAPED_UNICODE);
             // 处理 json_encode 错误

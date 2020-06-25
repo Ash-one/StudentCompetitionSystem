@@ -1,7 +1,7 @@
 <?php
 /**
  * @name Service_IPlatformModel
- * @desc Competion Service 接口，为 PlatformController 提供服务，详见 API_doc
+ * @desc Platfrom Service 接口，为 PlatformController 提供服务，详见 API_doc
  * @author kuroki
  */
 interface Service_IPlatformModel {
