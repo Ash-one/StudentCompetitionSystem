@@ -415,5 +415,20 @@ abstract class Db_Mongodb {
         Log::writeLog($file, $line, '');
         Log::writeLog($file, 'Info', $msg);
     }
+
+    /**
+     * 删除数据库
+     * 返回删除结果
+     */
+    public static function dropDatabase() {
+        //连接数据库
+        $m = new MongoDB\Driver\Manager('mongodb://127.0.0.1:27017');
+        //集合数组
+        $arr = ['administrator', 'award','competition','match','school','student'];
+        //遍历删除集合
+        foreach ($arr as $key => $value) {
+            $m->executeCommand('student_competition_system', new \MongoDB\Driver\Command(["drop" => $value]));
+        }
+    }
 }
 ?>

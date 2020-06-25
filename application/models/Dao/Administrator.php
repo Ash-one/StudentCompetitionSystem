@@ -35,6 +35,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
         foreach ($result as $document) {
             print_r($document);
         }
+
     }
 
     public static function getInstance() {
