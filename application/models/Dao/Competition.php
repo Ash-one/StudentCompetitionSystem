@@ -21,7 +21,7 @@ class Dao_CompetitionModel extends Db_Mongodb {
             'competition_participating_schools'=>[],
             'competition_participating_students'=>[],
             'competition_award_details'=>[],
-            'competition_match_items'=>''
+            'competition_match_items'=>[]
         ];
 
         if($this->count() == 0){
