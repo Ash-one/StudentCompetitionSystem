@@ -45,8 +45,8 @@ http://api.gy5461.xyz/competitions/overview
 |   holdingtime    |   string   |   举办时间：XXXX.XX.XX-XXXX.XX.XX |
 |   matchs         |   string   |   包含项目：项目名称之间用全角分号分隔  |
 |   num_all        |   int      |   总人数          |
-|   num_male       |   int      |   男生人数        |
-|   num_female     |   int      |   女生人数        |
+|   num_males      |   int      |   男生人数        |
+|   num_females    |   int      |   女生人数        |
 
 - JSON响应示例：
 ```
@@ -61,8 +61,8 @@ http://api.gy5461.xyz/competitions/overview
             "holdingtime":"2020.01.01-2020.02.01",
             "matchs"    : "巡线小车竞速；S弯无动力小车",
             "num_all"   : "114",
-            "num_male"  : "50",
-            "num_female": "64"
+            "num_males"  : "50",
+            "num_females": "64"
         },
         {
             "name_cmpt" : "全国高中生工程训练赛",
@@ -71,8 +71,8 @@ http://api.gy5461.xyz/competitions/overview
             "holdingtime":"2020.01.02-2020.02.02",
             "matchs"    : "巡线小车竞速；S弯无动力小车",
             "num_all"   : "114",
-            "num_male"  : "50",
-            "num_female": "64"
+            "num_males"  : "50",
+            "num_females": "64"
         }
     ]
 }
@@ -131,8 +131,7 @@ http://api.gy5461.xyz/competitions/info/name/全国大学生工程训练赛/year
 接口地址：http://api.gy5461.xyz/competitions/detail/     
 支持格式：json  
 请求方法：*GET*  
-请求示例：     
-http://api.gy5461.xyz/competitions/detail/name/全国大学生工程训练赛      
+请求示例：           
 http://api.gy5461.xyz/competitions/detail/name/全国大学生工程训练赛/year/2019  
      
 
@@ -187,7 +186,15 @@ http://api.gy5461.xyz/competitions/detail/name/全国大学生工程训练赛/ye
 支持格式：json  
 请求方法：*GET*  
 请求示例：     
-http://api.gy5461.xyz/competitions/contestant/
+http://api.gy5461.xyz/competitions/contestant/name/全国划水锦标赛/year/2020
+
+
+- 请求参数： 
+
+|  参数名称  |  类型     | 必填    | 说明               |
+|   ----    |  :----:  | :----: | ----               |
+|   name    |  string  |   Y    |  竞赛名称           |
+|   year    |  string  |    Y   |  年份              |
 
 
 - 响应内容： 
@@ -309,7 +316,7 @@ http://api.gy5461.xyz/students/info/id/201911143030
 |   id             |  string    |  ID          |
 |   num_cmpts      |  int       |  总参加竞赛数  |
 |   num_matchs     |  int       |  总参加项目数  |
-|   num_award      |  int       |  总获奖数     |
+|   num_awards     |  int       |  总获奖数     |
 |   num_aw_person  |  int       |  总获个人奖数  |
 |   num_aw_group   |  int       |  总获团体奖数  |
 
@@ -327,7 +334,7 @@ http://api.gy5461.xyz/students/info/id/201911143030
             "id":"201911143030",
             "num_cmpts" : 60,
             "num_matchs": 36,
-            "num_award" : 66,
+            "num_awards" : 66,
             "num_aw_person": 30,
             "num_aw_group": 36
         }
@@ -361,7 +368,7 @@ http://api.gy5461.xyz/students/detail/id/201911143030
 |   holdingtime    |   string   |   举办时间：XXXX.XX.XX-XXXX.XX.XX|
 |   name_match     |   string   |   项目名称                |
 |   award          |   string   |   获奖情况                |
-|   award_type     |   string   |   项目类别                |
+|   award_type     |   string   |   奖项类别                |
 
 - JSON响应示例:
 ```
@@ -442,7 +449,7 @@ http://api.gy5461.xyz/schools/overview/
 
 ### 学校数据二级界面
 
-接口功能：指定学校数据统计信息，通常只请求一次   
+接口功能：指定学校数据按年份的统计信息，通常只请求一次   
 接口地址：http://api.gy5461.xyz/schools/info   
 支持格式：json  
 请求方法：*GET*  
@@ -459,23 +466,52 @@ http://api.gy5461.xyz/schools/info/name/中国加里敦大学
 
 - 响应内容： 
 
-|   参数名称     |   类型      | 说明           |
-|   ----        |   :----:   | ----          |
-|   num_cmpts   |   int      |  总参赛次数     |
-|   num_stus    |   int      |  总参赛学生人次  |
-|   num_awards  |   int      |  总获奖人次     |
+|   参数名称           |   类型      | 说明           |
+|   ----              |   :----:   | ----          |
+|   year              |   string   |  年份          |
+|   num_cmpts         |   int      |  总参赛次数     |
+|   num_stus          |   int      |  总参赛学生人次  |
+|   num_awards        |   int      |  总获奖次数      |
+|   num_aw_stu        |   int      |  总获奖学生人次   |
+|   num_aw_person     |   int      |  总个人奖数      |
+|   num_aw_group      |   int      |  总团体奖数      |
+
 
 - JSON响应示例:
 ```
 {
     "status" : "0",
     "msg"    : "ok",
-    "result" :
+    "result" :{
+        "All" : {
+            "num_cmpts"      : 101 ,
+            "num_stus"       : 300 ,
+            "num_awards"     : 120,
+            "num_aw_stu"     : 150,
+            "num_aw_person"  : 40,
+            "num_aw_group"   : 40,
+        },
+        "ByYear":[
         {
+            "year"           : "2020",
             "num_cmpts"      : 23 ,
             "num_stus"       : 80 ,
-            "num_awards"     : 80
+            "num_awards"     : 80,
+            "num_aw_stu"     : 80,
+            "num_aw_person"  : 40,
+            "num_aw_group"   : 40,
+        },
+        {
+            "year"           : "2019",
+            "num_cmpts"      : 30 ,
+            "num_stus"       : 100 ,
+            "num_awards"     : 120,
+            "num_aw_stu"     : 140,
+            "num_aw_person"  : 80,
+            "num_aw_group"   : 40,
         }
+        ]
+    }
 }
 ```
 
