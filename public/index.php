@@ -1,4 +1,5 @@
 <?php
+require "../vendor/autoload.php"; //调用composer引入的外部库
 ob_start(); //打开缓冲区
 /* 定义这个常量是为了在application.ini中引用*/
 define('APPLICATION_PATH', dirname(dirname(__FILE__)));

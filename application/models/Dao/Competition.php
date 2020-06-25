@@ -21,7 +21,7 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
             'competition_participating_schools'=>[],
             'competition_participating_students'=>[],
             'competition_award_details'=>[],
-            'competition_match_items'=>''
+            'competition_match_items'=>[]
         ];
 
         if($this->count() == 0){
@@ -49,6 +49,46 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
         }
 
         return self::$instance;
+    }
+
+    public function uploadExcelData() {
+        $result = APIStatusCode::getOkMsgArray();
+
+        // 初始化日志信息
+        $logFile = 'upload_' . date('Y-m-d');
+        $line = '===================' . date('Y-m-d H:i:s') . '===================';
+        Log::writeLog($file, $line, '');
+
+        // 获取参数
+        $file = $this->getRequest()->getFiles()['excel'];
+
+        if ($file != null) {
+            // TODO: 验证文件格式
+            $file_extension = strtolower ( array_pop ( $file_array ) );
+            if($file_extension!="xls"||$file_extension!="xlsx"){
+                //不是表格文件
+
+            }
+
+
+            if ($file["error"] > 0) {
+                // 处理上传文件 error
+                $json = APIStatusCode::getErrorMsgJson(APIStatusCode::EXCEL_UPLOAD_ERROR, $file['error']);
+                Log::writeLog($file, 'Error: ', $file['error']);
+            }
+            else {
+                // 上传成功
+                Log::writeLog($file, 'Upload: ', $file['name']);
+                Log::writeLog($file, 'Type: ', $file['type']);
+                Log::writeLog($file, 'Size: ', $file['size'] / 1024 . 'kb');
+
+                //TODO: 处理 excel
+            }
+        } else {
+            // 处理必要参数为空
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NULL_PARAMS, " 未能获取到表单 excel 提交的内容");
+            Log::writeLog($file, 'Error: ', "未能获取到表单 excel 提交的内容");
+        }   
     }
 }
 ?>
