@@ -4,6 +4,8 @@
  * @author guoyi
  */
 class Dao_AwardModel extends Db_Mongodb {
+    protected static $instance = null;
+    
     /**
      * Db_AwardModel constructor.
      */

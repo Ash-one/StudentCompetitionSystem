@@ -4,6 +4,8 @@
  * @author guoyi
  */
 class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionModel{
+    protected static $instance = null;
+    
     /**
      * Db_CompetitionModel constructor.
      */

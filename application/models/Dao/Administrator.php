@@ -5,6 +5,8 @@
  * @author guoyi
  */
 class Dao_AdministratorModel extends Db_Mongodb {
+    protected static $instance = null;
+    
     /**
      * Db_AdministratorModel constructor.
      */

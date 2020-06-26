@@ -5,8 +5,6 @@
  * @desc MongoDB数据库操作封装
  */
 abstract class Db_Mongodb {
-    protected static $instance = null;
-
     protected $host = 'localhost';
     protected $port = '27017';
 

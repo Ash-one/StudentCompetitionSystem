@@ -4,6 +4,8 @@
  * @author guoyi
  */
 class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
+    protected static $instance = null;
+    
     /**
      * Db_SchoolModel constructor.
      */

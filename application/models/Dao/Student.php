@@ -4,6 +4,8 @@
  * @author guoyi
  */
 class Dao_StudentModel extends Db_Mongodb implements Service_IStudentModel{
+    protected static $instance = null;
+    
     /**
      * Db_StudentModel constructor.
      */

@@ -55,8 +55,8 @@ class ExcelParser
             $competition_sTime = $sheetData[$i]["I"];
             if (Dao_CompetitionModel::getInstance()->queryOne(['competition_name'=>$competition_name, 'competition_start_time'=>$competition_sTime]) == null) {
                 Dao_CompetitionModel::getInstance()->insert([
-                        'competition_name'=>competition_name,
-                        'competition_start_time'=>competition_sTime, 
+                        'competition_name'=>$competition_name,
+                        'competition_start_time'=>$competition_sTime, 
                         'competition_end_time'=>$sheetData[$i]["J"]
                     ]
                 );
