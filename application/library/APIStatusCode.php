@@ -14,6 +14,7 @@ class APIStatusCode {
     const NULL_PARAMS = 201;
     const RESULT_NOT_EXIST = 202;
     const JSON_ENCODE_ERROR = 203;
+    const EXCEL_UPLOAD_ERROR = 204;
 
     static private $errorCodeDictionary = array(
         // 系统错误码
@@ -22,7 +23,8 @@ class APIStatusCode {
         // API 错误码
         self::NULL_PARAMS => '必需参数为空',
         self::RESULT_NOT_EXIST => '搜索结果不存在',
-        self::JSON_ENCODE_ERROR => 'json_encode 错误：'
+        self::JSON_ENCODE_ERROR => 'json_encode 错误：',
+        self::EXCEL_UPLOAD_ERROR => 'excel 上传错误：'
     );
 
     static public function getOkMsgArray() {

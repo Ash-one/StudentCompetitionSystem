@@ -8,7 +8,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
     /**
      * Db_AdministratorModel constructor.
      */
-    protected function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -35,6 +35,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
         foreach ($result as $document) {
             print_r($document);
         }
+
     }
 
     public static function getInstance() {
