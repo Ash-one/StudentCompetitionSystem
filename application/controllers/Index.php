@@ -17,10 +17,6 @@ class IndexController extends JsonControllerAbstract {
 		$competition_model = new Dao_CompetitionModel();
 		$match_model = new Dao_MatchModel();
 		$award_model = new Dao_AwardModel();
-
-
-        ExcelParser::read('/Users/guoyi/Documents/x.xlsx');
-
     }
 
 	public function indexAction($name = "World!") {

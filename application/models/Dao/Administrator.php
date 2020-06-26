@@ -34,11 +34,11 @@ class Dao_AdministratorModel extends Db_Mongodb {
         //var_dump($this->getInfoById('5eef68a51e926726630ea304', ['password']));
 
         //查询结果
-        $filter = [];
-        $result = $this->query($filter);
-        foreach ($result as $document) {
-            print_r($document);
-        }
+        // $filter = [];
+        // $result = $this->query($filter);
+        // foreach ($result as $document) {
+        //     print_r($document);
+        // }
 
     }
 

@@ -78,7 +78,7 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
 
             $matchStr = "";
             foreach ($item['competition_match_items'] as $id) {
-                $matchStr .= $Dao_MatchModel::getInstance()->getInfoById($id, ['match_name'])['match_name'];
+                $matchStr .= Dao_MatchModel::getInstance()->getInfoById($id, ['match_name'])['match_name'];
                 $matchStr .= '，';
             }
 
@@ -192,7 +192,7 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
 
             $matchDetail['time_match'] = date("Y.m.d", $match['match_time']);
 
-            $competitonInfo = Dao_CompetitionModel::getInstance()->getInfoById($matchDetail['match_belong_competition'], ['competition_participating_schools']);
+            $competitonInfo = Dao_CompetitionModel::getInstance()->getInfoById($match['match_belong_competition'], ['competition_participating_schools']);
             $matchDetail['num_schools'] = count($competitonInfo['competition_participating_schools']);
 
             $studentCount = count($match['match_student_details']);
@@ -228,15 +228,15 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
     public function getCompetitionContestantsInfo($name, $year) {
         // 获取对应的 competition
         $queryArray = self::$instance->query(['competition_name' => $name]);
-        $competiton = null;
+        $competition = null;
         foreach ($queryArray as $item) {
             if (date("Y", $item['competition_start_time']) == $year) {
-                $competiton = $item;
+                $competition = $item;
                 break;
             }
         }
 
-        if ($competiton === null) {
+        if ($competition === null) {
             return null;
         }
 

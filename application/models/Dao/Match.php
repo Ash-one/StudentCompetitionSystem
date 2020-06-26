@@ -30,11 +30,11 @@ class Dao_MatchModel extends Db_Mongodb {
 //        }
 
         //查询结果
-        $filter = [];
-        $result = $this->query($filter);
-        foreach ($result as $document) {
-            print_r($document);
-        }
+        // $filter = [];
+        // $result = $this->query($filter);
+        // foreach ($result as $document) {
+        //     print_r($document);
+        // }
 
     }
 

@@ -15,6 +15,8 @@ class ExcelParser
     {
         require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
+        // Db_Mongodb::dropDatabase();
+
         $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
         // 方法二
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
