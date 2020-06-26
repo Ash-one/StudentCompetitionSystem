@@ -36,8 +36,8 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
 		}
 	}
 	
-	public function _initView(Yaf_Dispatcher $dispatcher) {
-		//在这里注册自己的view控制器，例如smarty,firekylin
+	public function _initData(Yaf_Dispatcher $dispatcher) {
+		// ExcelParser::read();
 	}
 
 

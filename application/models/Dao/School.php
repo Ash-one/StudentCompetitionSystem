@@ -68,19 +68,25 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
 
             $overview['num_cmpts'] = count($item['school_competition_details']);
 
-            $awardCount = count($item['school_award_details']);
-            $overview['num_awards'] = $awardCount;
-
-            // TODO: num_aw_stu ???
-
+            $studentAwardCount = 0;
+            $groupAwMatchArray = array();
             foreach ($item['school_award_details'] as $id) {
-                $awardType = Dao_AwardModel::getInstance()->getInfoById($id, ['award_type'])['award_type'];
-                if ($awardType == 1) {
+                $award = Dao_AwardModel::getInstance()->queryOne(['_id'=>$id]);
+                if ($award['award_type'] == 1) {
                     $studentAwardCount++;
+                } else {
+                    if (!in_array($award['match_object_id'], $groupAwMatchArray)) {
+                        $groupAwMatchArray[] = $award['match_object_id'];
+                    }
                 }
             }
+            $groupAwCount = count($groupAwMatchArray);
+            $awardCount = count($item['school_award_details']);
+
+            $overview['num_awards'] = $studentAwardCount + $groupAwCount;
+            $overview['num_aw_stu'] = $awardCount;
             $overview['num_aw_person'] = $studentAwardCount;
-            $overview['num_aw_group'] = $awardCount - $studentAwardCount;
+            $overview['num_aw_group'] = $groupAwCount;
 
             // 添加 overview
             $result[] = $overview;
@@ -113,19 +119,25 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
 
         $all['num_stus'] = count($item['school_students']);
 
-        $awardCount = count($item['school_award_details']);
-        $all['num_awards'] = $awardCount;
-
-        // TODO: num_aw_stu ???
-
+        $studentAwardCount = 0;
+        $groupAwMatchArray = array();
         foreach ($item['school_award_details'] as $id) {
-            $awardType = Dao_AwardModel::getInstance()->getInfoById($id, ['award_type'])['award_type'];
-            if ($awardType == 1) {
+            $award = Dao_AwardModel::getInstance()->queryOne(['_id'=>$id]);
+            if ($award['award_type'] == 1) {
                 $studentAwardCount++;
+            } else {
+                if (!in_array($award['match_object_id'], $groupAwMatchArray)) {
+                    $groupAwMatchArray[] = $award['match_object_id'];
+                }
             }
         }
+        $groupAwCount = count($groupAwMatchArray);
+        $awardCount = count($item['school_award_details']);
+
+        $all['num_awards'] = $studentAwardCount + $groupAwCount;
+        $all['num_aw_stu'] = $awardCount;
         $all['num_aw_person'] = $studentAwardCount;
-        $all['num_aw_group'] = $awardCount - $studentAwardCount;
+        $all['num_aw_group'] = $groupAwCount;
 
         // 添加 all
         $result['All'] = $all;
@@ -148,6 +160,7 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
 
             $awCount = 0;
             $personAwCount = 0;
+            $yearMatchArray = array();
             foreach ($item['school_award_details'] as $id) {
                 $aw = Dao_AwardModel::getInstance()->queryOne(['_id' => $id]);
                 $awCmpt = Dao_CompetitionModel::getInstance()->getInfoById($aw['competition_object_id'], ['competition_start_time']);
@@ -156,12 +169,19 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
 
                     if ($aw['award_type'] == 1) {
                         $personAwCount++;
+                    } else {
+                        if (!in_array($aw['match_object_id'], $yearMatchArray)) {
+                            $yearMatchArray[] = $aw['match_object_id'];
+                        }
                     }
                 }
             }
-            $yearInfo['num_awards'] = $awCount;
+            $yearGpCount = count($yearMatchArray);
+
+            $yearInfo['num_awards'] = $personAwCount + $yearGpCount;
+            $yearInfo['num_aw_stu'] = $awCount;
             $yearInfo['num_aw_person'] = $personAwCount;
-            $yearInfo['num_aw_group'] = $awCount - $personAwCount;
+            $yearInfo['num_aw_group'] = $yearGpCount;
 
             $byYear[] = $yearInfo;
         }

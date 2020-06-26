@@ -26,9 +26,15 @@ return [
 		['controller' => 'Competitions', 'action' => 'getDetail']
 	],
 	// Competitions ContestantOverview
-	'competitions_ContestantOverview' => [
+	'competitions_contestantOverview' => [
 		'competitions/contestant/*',
 		['controller' => 'Competitions', 'action' => 'getContestantOverview']
+	],
+
+	// upload Excel
+	'upload_Excel' => [
+		'upload',
+		['controller' => 'Competitions', 'action' => 'uploadExcelData']
 	],
 
 	// Students Overview

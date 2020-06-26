@@ -11,12 +11,11 @@ class ExcelParser
 
     }
 
-    public static function read()
+    public static function read($filePath)
     {
         require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
-        $inputFileName = dirname(dirname(dirname(__FILE__))) . '/SCS基础数据表.xlsx';
-        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($filePath);
         // 方法二
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 

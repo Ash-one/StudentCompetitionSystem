@@ -53,9 +53,8 @@ interface Service_ICompetitionModel {
     /**
      * 为 API: /upload 提供服务，将指定 excel 中的数据存入数据库中
      *
-     * @param string $path excel 文件路径
-     * @param string $fileName excel 文件名
+     * @param string $filePath excel 文件路径
      * @return null
      */
-    public function saveData($path, $fileName);
+    public function saveData($filePath);
 }
