@@ -28,6 +28,8 @@ class Dao_AdministratorModel extends Db_Mongodb {
             $this->insert(["administrator_name"=>"admin", "password"=>"24819090"]);
         }
 
+       // $this->update(["administrator_name"=>"admin"],['$addToSet'=>[]])
+
         //$this->update(['administrator_name'=>'admin'],['password'=>'123456']);
         //var_dump($this->getInfoById('5eef68a51e926726630ea304', ['password']));
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @name JsonController
+ * @name ExcelParser
  * @author IceSolitary
  * @desc 解析上传excel的部件
  */
@@ -93,19 +93,19 @@ class ExcelParser
             )['_id'];
 
             // 插入关联信息
+
             Dao_SchoolModel::getInstance()->update(['_id'=>$school_id], ['$addToSet'=>['school_competition_details'=>$competition_id]]);
             Dao_SchoolModel::getInstance()->update(['_id'=>$school_id], ['$addToSet'=>['school_award_details'=>$award_id]]);
             Dao_SchoolModel::getInstance()->update(['_id'=>$school_id], ['$addToSet'=>['school_students'=>$student_oid]]);
 
             Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_competition_details'=>$competition_id]]);
             Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_award_details'=>$award_id]]);
-            Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_match_details'=>$match_id]]);
-            
+
             Dao_CompetitionModel::getInstance()->update(['_id'=>$competition_id], ['$addToSet'=>['competition_participating_schools'=>$school_id]]);
             Dao_CompetitionModel::getInstance()->update(['_id'=>$competition_id], ['$addToSet'=>['competition_participating_students'=>$student_oid]]);
             Dao_CompetitionModel::getInstance()->update(['_id'=>$competition_id], ['$addToSet'=>['competition_award_details'=>$award_id]]);
             Dao_CompetitionModel::getInstance()->update(['_id'=>$competition_id], ['$addToSet'=>['competition_match_items'=>$match_id]]);
-  
+
             Dao_MatchModel::getInstance()->update(['_id'=>$match_id], ['$addToSet'=>['match_student_details'=>$student_oid]]);
         }
 

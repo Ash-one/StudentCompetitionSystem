@@ -32,6 +32,7 @@ class Dao_StudentModel extends Db_Mongodb implements Service_IStudentModel{
 //                "student_sex"=>0, "school_object_id"=>"", "student_competition_details"=>[], "student_award_details"=>[]]);
 //        }
 
+        //$this->update(['student_name'=>'姜小兰'],['$addToSet'=>['student_competition_details'=>'ajsdfllwker']]);
         //查询结果
         // $filter = [];
         // $result = $this->query($filter);

@@ -4,7 +4,8 @@
  * @author kuroki
  * @desc 默认控制器
  */
-include (dirname(__DIR__).'\library\ExcelParserTool.php');
+include (dirname(__DIR__).'/library/ExcelParser.php');
+include (dirname(__DIR__).'/library/JsonControllerAbstract.php');
 class IndexController extends JsonControllerAbstract {
     public function init() {
 		parent::init();
@@ -17,7 +18,8 @@ class IndexController extends JsonControllerAbstract {
 		$match_model = new Dao_MatchModel();
 		$award_model = new Dao_AwardModel();
 
-        ExcelParser::read();
+
+        ExcelParser::read('/Users/guoyi/Documents/x.xlsx');
 
     }
 

@@ -18,7 +18,9 @@ abstract class Db_Mongodb {
     protected $primary_key = '_id';
 
     protected static $op = [
-        '$inc'
+        '$inc',
+        '$addToSet',
+        '$set'
     ];
 
     /**
