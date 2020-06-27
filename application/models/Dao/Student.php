@@ -23,7 +23,8 @@ class Dao_StudentModel extends Db_Mongodb implements Service_IStudentModel{
             'student_sex'=>'',
             'school_object_id'=>'',
             'student_competition_details'=>[],
-            'student_award_details'=>[]
+            'student_award_details'=>[],
+            'student_match_details'=>[]
         ];
 
 //        if($this->count() == 0){
