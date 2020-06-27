@@ -172,9 +172,6 @@ class CompetitionsController extends JsonControllerAbstract {
         $line = '===================' . date('Y-m-d H:i:s') . '===================';
         Log::writeLog($logFile, $line, '');
 
-        print_r($this->getRequest()->getMethod());
-        print_r($this->getRequest()->getFiles());
-        print_r($this->getRequest()->getPost());
         // 获取参数
         $file = $this->getRequest()->getFiles()['excel'];
 
