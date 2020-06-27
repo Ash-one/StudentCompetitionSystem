@@ -19,8 +19,7 @@ abstract class Db_Mongodb {
 
     protected static $op = [
         '$inc',
-        '$addToSet',
-        '$set'
+        '$addToSet'
     ];
 
     /**
@@ -427,7 +426,11 @@ abstract class Db_Mongodb {
         $arr = ['administrator', 'award','competition','match','school','student'];
         //遍历删除集合
         foreach ($arr as $key => $value) {
-            $m->executeCommand('student_competition_system', new \MongoDB\Driver\Command(["drop" => $value]));
+            try {
+                $m->executeCommand('student_competition_system', new \MongoDB\Driver\Command(["drop" => $value]));
+            } catch (Exception $exception) {
+                self::log($exception->getMessage());
+            }
         }
     }
 }
