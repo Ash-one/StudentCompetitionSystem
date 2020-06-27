@@ -10,5 +10,6 @@ abstract class JsonControllerAbstract extends Yaf_Controller_Abstract {
     public function init() {
         $this->jsonResponse = $this->getResponse();
         $this->jsonResponse->setHeader('Content-Type', 'application/json; charset=utf-8');
+        $this->jsonResponse->setHeader("Access-Control-Allow-Origin","*"); // 跨域设置
 	}
 }
