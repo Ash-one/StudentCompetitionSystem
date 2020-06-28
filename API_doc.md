@@ -86,7 +86,9 @@ http://api.gy5461.xyz/login/alter
 
 |  参数名称     |   类型     |    必填    |   说明              |
 |   ----       |  :----:   |  :----:   |   :----             |
-|   pw         |  string   |    Y      |   已加密密码         |
+|   name       |  string   |    Y      |   账户名            |
+|   pw_old     |  string   |    Y      |   已加密原密码         |
+|   pw_new     |  string   |    Y      |   已加密新密码         |
 |   tag        |  int      |    Y      |   1:请求公钥，2:登录  |
 
 - 响应内容： 
@@ -111,7 +113,7 @@ http://api.gy5461.xyz/login/alter
     "msg"    : "ok",
     "result" :
         {
-            "msg_alter" : "修改成功"
+            "msg_alter" : "修改成功/原密码错误，修改失败"
         }
 }
 
