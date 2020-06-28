@@ -10,6 +10,16 @@
  */
 
 return [
+	// Login
+	'Login' => [
+		'login',
+		['controller' => 'Account', 'action' => 'login']
+	],
+	// Alter
+	'Alter' => [
+		'alter',
+		['controller' => 'Account', 'action' => 'alter']
+	],
 	// Competitions Overview
 	'competitions_overview' => [
 		'competitions/overview',
