@@ -10,7 +10,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
     /**
      * Db_AdministratorModel constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -25,7 +25,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
         if($this->count() == 0)
         {
             //空集合插入记录
-            $this->insert(["administrator_name"=>"admin", "password"=>"24819090"]);
+            $this->insert(["administrator_name"=>"admin", "password"=>md5("yukayuka")]);
         }
 
        // $this->update(["administrator_name"=>"admin"],['$addToSet'=>[]])

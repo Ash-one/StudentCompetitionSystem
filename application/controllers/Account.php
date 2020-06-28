@@ -1,6 +1,6 @@
 <?php
 require dirname(__DIR__)."/library/ConfigRSA.php";
-require dirname(__DIR__)."/library/RSAUtils.php";
+// require dirname(__DIR__)."/library/RSAUtils.php";
 
 /**
  * @name AccountController
@@ -11,7 +11,6 @@ class AccountController extends JsonControllerAbstract
 {
     public function init() {
         parent::init();
-
     }
 
     /**
