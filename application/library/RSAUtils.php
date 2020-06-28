@@ -84,20 +84,3 @@ class RSAUtils
     }
 
 }
-
-;
-$rsa = new RSAUtils();
-$data['name'] = 'Tom';
-$data['age']  = '20';
-$privEncrypt = $rsa->privEncrypt(json_encode($data));
-echo '私钥加密后:'.$privEncrypt;
-
-
-$publicDecrypt = $rsa->publicDecrypt($privEncrypt);
-echo '公钥解密后:'.$publicDecrypt;
-
-$publicEncrypt = $rsa->publicEncrypt(json_encode($data));
-echo '公钥加密后:'.$publicEncrypt;
-
-$privDecrypt = $rsa->privDecrypt($publicEncrypt);
-echo '私钥解密后:'.$privDecrypt;
