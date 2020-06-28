@@ -16,6 +16,7 @@ class APIStatusCode {
     const JSON_ENCODE_ERROR = 203;
     const EXCEL_UPLOAD_ERROR = 204;
     const Tag_ERROR = 205;
+    const NOT_LOGIN_ERROR = 206;
 
     static private $errorCodeDictionary = array(
         // 系统错误码
@@ -26,7 +27,8 @@ class APIStatusCode {
         self::RESULT_NOT_EXIST => '搜索结果不存在',
         self::JSON_ENCODE_ERROR => 'json_encode 错误：',
         self::EXCEL_UPLOAD_ERROR => 'excel 上传错误：',
-        self::Tag_ERROR => 'tag参数错误'
+        self::Tag_ERROR => 'tag参数错误',
+        self::NOT_LOGIN_ERROR =>'未登录'
     );
 
     static public function getOkMsgArray() {
