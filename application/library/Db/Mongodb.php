@@ -279,6 +279,14 @@ abstract class Db_Mongodb {
     }
 
     /**
+     * 插入库中不存在的记录
+     * @param $doc
+     */
+    public function uniqueInsert($doc) {
+        $this->update($doc,$doc,['multi'=>false, 'upsert'=>true]);
+    }
+
+    /**
      * 通过主键 _id 修改记录字段值
      * @param     string           $_id
      * @param     array            $update ['$set' => ['name' => 'emma', 'age' => 12]]
