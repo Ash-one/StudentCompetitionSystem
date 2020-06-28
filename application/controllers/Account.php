@@ -1,6 +1,5 @@
 <?php
 require dirname(__DIR__)."/library/ConfigRSA.php";
-require dirname(__DIR__)."/library/RSAUtils.php";
 
 /**
  * @name AccountController
@@ -20,6 +19,8 @@ class AccountController extends JsonControllerAbstract
      * @return FLASE
      */
     public function loginAction() {
+        //  防止全局变量造成安全隐患
+        $admin = false;
 
         if ($_POST['tag'] !== null){
             // 请求公钥
@@ -69,6 +70,11 @@ class AccountController extends JsonControllerAbstract
                             $error = json_last_error_msg();
                             $json = APIStatusCode::getErrorMsgJson(APIStatusCode::JSON_ENCODE_ERROR, $error);
                         }
+
+                        //  当验证通过后，启动 Session
+                        session_start();
+                        //  注册登陆成功的 admin 变量，并赋值 true
+                        $_SESSION["admin"] = true;
 
                         // 设置 response
                         $this->jsonResponse->setBody($json);
@@ -178,7 +184,7 @@ class AccountController extends JsonControllerAbstract
 
                         $result['result'] = array('msg_login'=>'修改成功');
                         //修改密码
-                        Dao_AdministratorModel::getInstance()->update(['administrator_name'=>$accountName],['password'=>$pw_new]);
+                        Dao_AdministratorModel::getInstance()->update(['administrator_name'=>$accountName],['password'=>$pwMD5_new]);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
