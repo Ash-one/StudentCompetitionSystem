@@ -173,6 +173,7 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
             }
             $yearGpCount = count($yearMatchArray);
 
+            $yearInfo['num_stus'] = $awCount; // TODO: 似乎与 num_aw_stu 相同？
             $yearInfo['num_awards'] = $personAwCount + $yearGpCount;
             $yearInfo['num_aw_stu'] = $awCount;
             $yearInfo['num_aw_person'] = $personAwCount;

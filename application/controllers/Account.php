@@ -61,7 +61,7 @@ class AccountController extends JsonControllerAbstract
                     if($pwMD5 == $pwMD5FromDB && $pwMD5 !== null){
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'成功登陆');
+                        $result['result'] = array('msg_login'=>1);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -85,7 +85,7 @@ class AccountController extends JsonControllerAbstract
                     else{
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'密码错误');
+                        $result['result'] = array('msg_login'=>0);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -182,7 +182,7 @@ class AccountController extends JsonControllerAbstract
                     if($pwMD5_old == $pwMD5FromDB){
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'修改成功');
+                        $result['result'] = array('msg_login'=>1);
                         //修改密码
                         Dao_AdministratorModel::getInstance()->update(['administrator_name'=>$accountName],['password'=>$pwMD5_new]);
 
@@ -203,7 +203,7 @@ class AccountController extends JsonControllerAbstract
                     else{
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'原密码错误');
+                        $result['result'] = array('msg_login'=>0);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
