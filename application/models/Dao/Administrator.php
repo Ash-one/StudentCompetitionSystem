@@ -25,7 +25,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
         if($this->count() == 0)
         {
             //空集合插入记录
-            $this->insert(["administrator_name"=>"admin", "password"=>md5("yukayuka")]);
+            $this->insert(["administrator_name"=>"kurokuro", "password"=>md5("yukayuka")]);
         }
 
        // $this->update(["administrator_name"=>"admin"],['$addToSet'=>[]])

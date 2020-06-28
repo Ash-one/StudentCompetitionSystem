@@ -12,12 +12,12 @@
 return [
 	// Login
 	'Login' => [
-		'login',
+		'login/:tag',
 		['controller' => 'Account', 'action' => 'login']
 	],
 	// Alter
 	'Alter' => [
-		'alter',
+		'alter/:tag',
 		['controller' => 'Account', 'action' => 'alter']
 	],
 	// Competitions Overview
