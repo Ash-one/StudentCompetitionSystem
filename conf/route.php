@@ -62,6 +62,11 @@ return [
 		'students/detail/*',
 		['controller' => 'Students', 'action' => 'getDetail']
 	],
+	// Students Chart
+	'students_chart' => [
+		'students/chart/*',
+		['controller' => 'Students', 'action' => 'getChartData']
+	],
 
 	// Schools Overview
 	'schools_overview' => [

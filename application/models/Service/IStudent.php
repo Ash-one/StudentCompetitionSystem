@@ -36,4 +36,15 @@ interface Service_IStudentModel {
      * @return array 一个 awardDetail 数组
      */
     public function getStudentAwardsDetail($id);
+
+    /**
+     * 为 API: /students/chart/ 提供服务，返回由参数指定的 student 的按年度的统计信息
+     *      yearDetail: 一个键值对数组，其 keys:
+     *          year, num_cmpts, num_matchs,
+     *          num_awards, num_aw_person, num_aw_group
+     *
+     * @param int $id student 学号
+     * @return array 一个 awardDetail 数组
+     */
+    public function getStudentChartDataDetail($id);
 }
