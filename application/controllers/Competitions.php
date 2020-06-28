@@ -199,6 +199,9 @@ class CompetitionsController extends JsonControllerAbstract {
             Log::writeLog($logFile, 'Error: ', "未能获取到表单 excel 提交的内容");
         } 
 
+        // 设置 response
+		$this->jsonResponse->setBody($json);
+
         return FALSE;
     }
 }

@@ -36,13 +36,13 @@ class ExcelParser
             // TODO: $sheetData[$i]["C"] 年级的转换
 
             // 插入 school 基础信息
-            Dao_SchoolModel::getInstance()->insert(['school_name'=>$sheetData[$i]["E"]]);
+            Dao_SchoolModel::getInstance()->uniqueInsert(['school_name'=>$sheetData[$i]["E"]]);
             $school_id = Dao_SchoolModel::getInstance()->queryOne(['school_name'=>$sheetData[$i]["E"]])["_id"];
 
             // 插入 student 基础信息
             $student_id = $sheetData[$i]["B"];
             if (Dao_StudentModel::getInstance()->queryOne(['student_id' => $student_id]) == null) {
-                Dao_StudentModel::getInstance()->insert([
+                Dao_StudentModel::getInstance()->uniqueInsert([
                         'student_name'=>$sheetData[$i]["A"], 
                         'student_id' => $student_id,
                         'student_grade' => $sheetData[$i]["C"],
@@ -56,7 +56,7 @@ class ExcelParser
             $competition_name = $sheetData[$i]["H"];
             $competition_sTime = $sheetData[$i]["I"];
             if (Dao_CompetitionModel::getInstance()->queryOne(['competition_name'=>$competition_name, 'competition_start_time'=>$competition_sTime]) == null) {
-                Dao_CompetitionModel::getInstance()->insert([
+                Dao_CompetitionModel::getInstance()->uniqueInsert([
                         'competition_name'=>$competition_name,
                         'competition_start_time'=>$competition_sTime, 
                         'competition_end_time'=>$sheetData[$i]["J"]
@@ -68,7 +68,7 @@ class ExcelParser
             // 插入 match 基础信息
             $match_name = $sheetData[$i]["F"];
             if (Dao_MatchModel::getInstance()->queryOne(['match_name'=>$match_name, 'match_belong_competition'=>$competition_id]) == null) {
-                Dao_MatchModel::getInstance()->insert([
+                Dao_MatchModel::getInstance()->uniqueInsert([
                         'match_name'=>$match_name,
                         'match_time'=>$sheetData[$i]["G"], 
                         'match_belong_competition'=>$competition_id
@@ -78,7 +78,7 @@ class ExcelParser
             $match_id = Dao_MatchModel::getInstance()->queryOne(['match_name'=>$match_name, 'match_belong_competition'=>$competition_id])['_id'];
 
             // 插入 award 基础信息
-            Dao_AwardModel::getInstance()->insert([
+            Dao_AwardModel::getInstance()->uniqueInsert([
                     'competition_object_id'=>$competition_id,
                     'match_object_id'=>$match_id, 
                     'award_type'=>$sheetData[$i]["L"],
