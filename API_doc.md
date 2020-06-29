@@ -75,11 +75,11 @@ http://api.gy5461.xyz/login
 
 
 ### 修改密码接口
-接口地址：http://api.gy5461.xyz/login/alter   
+接口地址：http://api.gy5461.xyz/alter   
 支持格式：json  
 请求方法：*POST*  
 请求示例：     
-http://api.gy5461.xyz/login/alter    
+http://api.gy5461.xyz/alter    
 
 
 - 请求参数： 
