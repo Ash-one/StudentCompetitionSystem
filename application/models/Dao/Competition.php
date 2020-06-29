@@ -26,18 +26,6 @@ class Dao_CompetitionModel extends Db_Mongodb implements Service_ICompetitionMod
             'competition_match_items'=>[]
         ];
 
-//        if($this->count() == 0){
-//            //空集合插入记录
-//            $this->insert(["competition_name"=>"北京市大学生运动会", "competition_start_time"=>"1580864400", "competition_end_time"=>"1581238800",
-//                "competition_participating_schools"=>[], "competition_participating_students"=>[], "competition_award_details"=>[], "competition_match_items"=>[]]);
-//        }
-
-        //查询结果
-        // $filter = [];
-        // $result = $this->query($filter);
-        // foreach ($result as $document) {
-        //     print_r($document);
-        // }
     }
 
     /**

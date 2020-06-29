@@ -105,6 +105,7 @@ class ExcelParser
             Dao_SchoolModel::getInstance()->update(['_id'=>$school_id], ['$addToSet'=>['school_award_details'=>$award_id]]);
             Dao_SchoolModel::getInstance()->update(['_id'=>$school_id], ['$addToSet'=>['school_students'=>$student_oid]]);
 
+            Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['school_object_id'=>$school_id]);
             Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_competition_details'=>$competition_id]]);
             Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_award_details'=>$award_id]]);
             Dao_StudentModel::getInstance()->update(['_id'=>$student_oid], ['$addToSet'=>['student_match_details'=>$match_id]]);

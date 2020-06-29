@@ -10,7 +10,7 @@ class Dao_AdministratorModel extends Db_Mongodb {
     /**
      * Db_AdministratorModel constructor.
      */
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -25,21 +25,8 @@ class Dao_AdministratorModel extends Db_Mongodb {
         if($this->count() == 0)
         {
             //空集合插入记录
-            $this->insert(["administrator_name"=>"admin", "password"=>"24819090"]);
+            $this->insert(["administrator_name"=>"baobao", "password"=>md5("516527")]);
         }
-
-       // $this->update(["administrator_name"=>"admin"],['$addToSet'=>[]])
-
-        //$this->update(['administrator_name'=>'admin'],['password'=>'123456']);
-        //var_dump($this->getInfoById('5eef68a51e926726630ea304', ['password']));
-
-        //查询结果
-        // $filter = [];
-        // $result = $this->query($filter);
-        // foreach ($result as $document) {
-        //     print_r($document);
-        // }
-
     }
 
     public static function getInstance() {

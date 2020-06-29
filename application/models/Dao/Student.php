@@ -26,20 +26,6 @@ class Dao_StudentModel extends Db_Mongodb implements Service_IStudentModel{
             'student_award_details'=>[],
             'student_match_details'=>[]
         ];
-
-//        if($this->count() == 0){
-//            //空集合插入记录
-//            $this->insert(["student_name"=>"姜小兰", "student_id"=>"4010101", "student_grade"=>"41",
-//                "student_sex"=>0, "school_object_id"=>"", "student_competition_details"=>[], "student_award_details"=>[]]);
-//        }
-
-        //$this->update(['student_name'=>'姜小兰'],['$addToSet'=>['student_competition_details'=>'ajsdfllwker']]);
-        //查询结果
-        // $filter = [];
-        // $result = $this->query($filter);
-        // foreach ($result as $document) {
-        //     print_r($document);
-        // }
     }
 
     /**
@@ -199,6 +185,75 @@ class Dao_StudentModel extends Db_Mongodb implements Service_IStudentModel{
             }
             
             $result[] = $awardDetail;
+        }
+
+        return $result;
+    }
+
+    /**
+     * 为 API: /students/chart/ 提供服务，返回由参数指定的 student 的按年度的统计信息
+     *      yearDetail: 一个键值对数组，其 keys:
+     *          year, num_cmpts, num_matchs,
+     *          num_awards, num_aw_person, num_aw_group
+     *
+     * @param int $id student 学号
+     * @return array 一个 awardDetail 数组
+     */
+    public function getStudentChartDataDetail($id) {
+        $student = self::$instance->queryOne(['student_id' => $id]);
+        if ($student == null) {
+            return null;
+        }
+
+        $result = array();
+        $nowYear = intval(date('Y'));
+        for ($i = 0; $i < 2; $i++) {
+            $yearInfo = array();
+            $year = $nowYear - $i;
+
+            $yearInfo['year'] = $year;
+
+            $cmptCount = 0;
+            $matchCount = 0;
+            $awCount = 0;
+            $awPCount = 0;
+
+            $cmptIdArray = $student['student_competition_details'];
+            foreach ($cmptIdArray as $cmptId) {
+                $item = Dao_CompetitionModel::getInstance()->queryOne(['_id'=>$cmptId]);
+                if (date("Y", $item['competition_start_time']) == $year) {
+                    $cmptCount++;
+                }
+            }
+
+            $matchIdArray = $student['student_match_details'];
+            foreach ($matchIdArray as $matchId) {
+                $item = Dao_MatchModel::getInstance()->queryOne(['_id'=>$matchId]);
+                if (date("Y", $item['match_time']) == $year) {
+                    $matchCount++;
+                }
+            }
+
+            $awIdArray = $student['student_award_details'];
+            foreach ($awIdArray as $awId) {
+                $award = Dao_AwardModel::getInstance()->queryOne(['_id'=>$awId]);
+                $item = Dao_MatchModel::getInstance()->queryOne(['_id'=>$award['match_object_id']]);
+                if (date("Y", $item['match_time']) == $year) {
+                    $awCount++;
+
+                    if ($award['award_type'] == 1) {
+                        $awPCount++;
+                    }
+                }
+            }
+
+            $yearInfo['num_cmpts'] = $cmptCount;
+            $yearInfo['num_matchs'] = $matchCount;
+            $yearInfo['num_awards'] = $awCount;
+            $yearInfo['num_aw_person'] = $awPCount;
+            $yearInfo['num_aw_group'] = $awCount - $awPCount;
+
+            $result[] = $yearInfo;
         }
 
         return $result;

@@ -12,12 +12,12 @@
 return [
 	// Login
 	'Login' => [
-		'login',
+		'login/:tag',
 		['controller' => 'Account', 'action' => 'login']
 	],
 	// Alter
 	'Alter' => [
-		'alter',
+		'alter/:tag',
 		['controller' => 'Account', 'action' => 'alter']
 	],
 	// Competitions Overview
@@ -61,6 +61,11 @@ return [
 	'students_detail' => [
 		'students/detail/*',
 		['controller' => 'Students', 'action' => 'getDetail']
+	],
+	// Students Chart
+	'students_chart' => [
+		'students/chart/*',
+		['controller' => 'Students', 'action' => 'getChartData']
 	],
 
 	// Schools Overview

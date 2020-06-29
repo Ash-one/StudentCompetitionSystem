@@ -10,7 +10,6 @@ class AccountController extends JsonControllerAbstract
 {
     public function init() {
         parent::init();
-
     }
 
     /**
@@ -21,10 +20,11 @@ class AccountController extends JsonControllerAbstract
     public function loginAction() {
         //  防止全局变量造成安全隐患
         $admin = false;
+        $tag = $this->getRequest()->getParam('tag');
 
-        if ($_POST['tag'] !== null){
+        if ($tag !== null){
             // 请求公钥
-            if ($_POST['tag'] == 1) {
+            if ($tag == 1) {
                 $result = APIStatusCode::getOkMsgArray();
 
                 $result['result'] = array('pubkey'=>RSA_public);
@@ -43,7 +43,7 @@ class AccountController extends JsonControllerAbstract
                 return FALSE;
             }
             // 返回登录结果
-            elseif ($_POST['tag'] == 2) {
+            elseif ($tag == 2) {
                 if ($_POST['name'] !== null && $_POST['pw'] !== null)
                 {
                     $accountName = $_POST['name'];
@@ -61,7 +61,7 @@ class AccountController extends JsonControllerAbstract
                     if($pwMD5 == $pwMD5FromDB && $pwMD5 !== null){
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'成功登陆');
+                        $result['result'] = array('msg_login'=>1);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -85,7 +85,7 @@ class AccountController extends JsonControllerAbstract
                     else{
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'密码错误');
+                        $result['result'] = array('msg_login'=>0);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
@@ -140,10 +140,10 @@ class AccountController extends JsonControllerAbstract
      * @return FLASE
      */
     public function alterAction() {
-
-        if ($_POST['tag'] !== null ) {
+        $tag = $this->getRequest()->getParam('tag');
+        if ($tag !== null ) {
             // 请求公钥
-            if ($_POST['tag'] == 1) {
+            if ($tag == 1) {
                 $result = APIStatusCode::getOkMsgArray();
 
                 $result['result'] = array('pubkey'=>RSA_public);
@@ -162,7 +162,7 @@ class AccountController extends JsonControllerAbstract
                 return FALSE;
             }
             // 返回修改结果
-            elseif ($_POST['tag'] == 2) {
+            elseif ($tag == 2) {
                 if ($_POST['name'] !== null && $_POST['pw_old'] !== null && $_POST['pw_new'] !== null) {
                     $accountName = $_POST['name'];
                     $pw_old = $_POST['pw_old'];
@@ -182,7 +182,7 @@ class AccountController extends JsonControllerAbstract
                     if($pwMD5_old == $pwMD5FromDB){
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'修改成功');
+                        $result['result'] = array('msg_login'=>1);
                         //修改密码
                         Dao_AdministratorModel::getInstance()->update(['administrator_name'=>$accountName],['password'=>$pwMD5_new]);
 
@@ -203,7 +203,7 @@ class AccountController extends JsonControllerAbstract
                     else{
                         $result = APIStatusCode::getOkMsgArray();
 
-                        $result['result'] = array('msg_login'=>'原密码错误');
+                        $result['result'] = array('msg_login'=>0);
 
                         // 编码为 json
                         $json = json_encode($result, JSON_UNESCAPED_UNICODE);
