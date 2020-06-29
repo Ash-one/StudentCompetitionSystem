@@ -114,7 +114,47 @@ class ExcelParser
 
     }
 
+    public static function verifyData($dataArray){
+        echo gettype($dataArray['A'])." ";
+        echo gettype($dataArray['B'])." ";
+        echo gettype($dataArray['C'])." ";
+        echo gettype($dataArray['D'])." ";
+        echo gettype($dataArray['E'])." ";
+        echo gettype($dataArray['F'])." ";
+        echo gettype($dataArray['G'])." ";
+        echo gettype($dataArray['H'])." ";
+        echo gettype($dataArray['I'])." ";
+        echo gettype($dataArray['J'])." ";
+        echo gettype($dataArray['K'])." ";
+        echo gettype($dataArray['L'])." ";
 
-
+    }
 
 }
+
+//require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
+//
+//// Db_Mongodb::dropDatabase();
+//echo dirname(dirname(__DIR__)) . '/SCS基础数据表.xlsx';
+//$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load(dirname(dirname(__DIR__)) . '/SCS基础数据表.xlsx');
+//// 方法二
+//$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+//
+//for ($i = 2 ; $i<count($sheetData);$i++) {
+//
+//    if ($sheetData[$i]["D"] == "男") {
+//        $sheetData[$i]["D"] = '1';
+//    } elseif ($sheetData[$i]["D"] == "女") {
+//        $sheetData[$i]["D"] = '0';
+//    } else {
+//        echo "sex_error";
+//    }
+//
+//
+//
+//    ExcelParser::verifyData($sheetData[$i]);
+//    break;
+//}
+$regGrade = '(1[1-6]|2[1-3]|3[1-3]|4[1-4])';
+$regSex = '(^1|2$)';
+echo $num = preg_match($regSex,"122");
