@@ -33,10 +33,61 @@ class ExcelParser
                 echo "sex_error";
             }
 
-            // TODO: $sheetData[$i]["C"] 年级的转换
-
             if(!ExcelParser::verifyData($sheetData[$i],$i)){
                 continue;
+            }
+
+            switch (intval($sheetData[$i]["C"])){
+                case 11:
+                    $sheetData[$i]["C"] = '小学一年级';
+                    break;
+                case 12:
+                    $sheetData[$i]["C"] = '小学二年级';
+                    break;
+                case 13:
+                    $sheetData[$i]["C"] = '小学三年级';
+                    break;
+                case 14:
+                    $sheetData[$i]["C"] = '小学四年级';
+                    break;
+                case 15:
+                    $sheetData[$i]["C"] = '小学五年级';
+                    break;
+                case 16:
+                    $sheetData[$i]["C"] = '小学六年级';
+                    break;
+                case 21:
+                    $sheetData[$i]["C"] = '初中一年级';
+                    break;
+                case 22:
+                    $sheetData[$i]["C"] = '初中二年级';
+                    break;
+                case 23:
+                    $sheetData[$i]["C"] = '初中三年级';
+                    break;
+                case 31:
+                    $sheetData[$i]["C"] = '高中一年级';
+                    break;
+                case 32:
+                    $sheetData[$i]["C"] = '高中二年级';
+                    break;
+                case 33:
+                    $sheetData[$i]["C"] = '高中三年级';
+                    break;
+                case 41:
+                    $sheetData[$i]["C"] = '大学一年级';
+                    break;
+                case 42:
+                    $sheetData[$i]["C"] = '大学二年级';
+                    break;
+                case 43:
+                    $sheetData[$i]["C"] = '大学三年级';
+                    break;
+                case 44:
+                    $sheetData[$i]["C"] = '大学四年级';
+                    break;
+                default:
+                    echo "数据格式错误";
             }
 
             // 插入 school 基础信息
@@ -131,7 +182,7 @@ class ExcelParser
 
     //判断字符串是否为空
     public static function is_Null($str){
-        if($str == ""){
+        if($str == null){
             return 1;
         } else {
             return 0;
@@ -214,5 +265,3 @@ class ExcelParser
     }
 
 }
-
-
