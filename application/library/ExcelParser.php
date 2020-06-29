@@ -35,8 +35,7 @@ class ExcelParser
 
             // TODO: $sheetData[$i]["C"] 年级的转换
 
-            if(!ExcelParser::verifyData($sheetData[$i])){
-                echo "该条导入数据出错";
+            if(!ExcelParser::verifyData($sheetData[$i],$i)){
                 continue;
             }
 
@@ -130,7 +129,7 @@ class ExcelParser
         }
     }
 
-    //判断字符串
+    //判断字符串是否为空
     public static function is_Null($str){
         if($str == ""){
             return 1;
@@ -140,7 +139,7 @@ class ExcelParser
 
     }
 
-    public static function verifyData($dataArray){
+    public static function verifyData($dataArray,$row){
 
         //用于验证的正则式
         $regStudentID = '([0-9]{5,11})';
@@ -151,62 +150,62 @@ class ExcelParser
         $regAwardType = '([1-7])';
 
         if(self::is_Null($dataArray['A'])){
-            echo 1;
+            Db_Mongodb::log("row".$row.":name字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regStudentID,$dataArray['B'])){
-            echo 2;
+            Db_Mongodb::log("row".$row.":student_id字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regGrade,$dataArray['C'])){
-            echo 3;
+            Db_Mongodb::log("row".$row.":student_grade字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regSex,$dataArray['D'])){
-            echo $dataArray['D'];
+            Db_Mongodb::log("row".$row.":student_sex字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(self::is_Null($dataArray['E'])){
-            echo 5;
+            Db_Mongodb::log("row".$row.":school_name字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(self::is_Null($dataArray['F'])){
-            echo 6;
+            Db_Mongodb::log("row".$row.":match_name字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regTime,$dataArray['G'])){
-            echo 7;
+            Db_Mongodb::log("row".$row.":match_time字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(self::is_Null($dataArray['H'])){
-            echo 8;
+            Db_Mongodb::log("row".$row.":competition_name字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regTime,$dataArray['I'])){
-            echo 9;
+            Db_Mongodb::log("row".$row.":competition_start_time字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regTime,$dataArray['J'])){
-            echo 10;
+            Db_Mongodb::log("row".$row.":competition_end_time字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regAwardRank,$dataArray['K'])){
-            echo 11;
+            Db_Mongodb::log("row".$row.":award_rank字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
         if(!self::pregMatchTotalStr($regAwardType,$dataArray['L'])){
-            echo 12;
+            Db_Mongodb::log("row".$row.":award_type字段不符合数据规范,将跳过插入本条记录");
             return false;
         }
 
@@ -215,6 +214,5 @@ class ExcelParser
     }
 
 }
-
 
 
