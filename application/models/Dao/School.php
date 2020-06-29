@@ -147,7 +147,7 @@ class Dao_SchoolModel extends Db_Mongodb implements Service_ISchoolModel {
 
             $cmptCount = 0;
             foreach ($item['school_competition_details'] as $id) {
-                if (date("Y", Dao_CompetitionModel::getInstance()->getInfoById($id, ['competition_start_time'])) == $year) {
+                if (date("Y", Dao_CompetitionModel::getInstance()->getInfoById($id, ['competition_start_time'])['competition_start_time']) == $year) {
                     $cmptCount++;
                 }
             }
