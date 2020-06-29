@@ -9,6 +9,12 @@ $application = new Yaf_Application( APPLICATION_PATH . "/conf/application.ini");
 
 // 初始化各种配置
 define('LOG_DIR', $application->getConfig()->product->logDirectory);
+// session 相关
+$sessionPath = $application->getConfig()->session->savePath;
+if (!file_exists($sessionPath)) { 
+    mkdir($sessionPath, 0777, true);
+}
+session_save_path($sessionPath);
 
 $application->getDispatcher()->autoRender($application->getConfig()->product->autoRender);
 

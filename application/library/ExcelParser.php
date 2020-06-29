@@ -21,7 +21,7 @@ class ExcelParser
         // 方法二
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
-        for ($i = 2 ; $i<count($sheetData);$i++){
+        for ($i = 2 ; $i<=count($sheetData);$i++){
 
             if($sheetData[$i]["D"]=="男") {
                 $sheetData[$i]["D"] = '1';
