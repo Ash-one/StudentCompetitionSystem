@@ -14,6 +14,9 @@ class IndexController extends JsonControllerAbstract {
 		$admin = Dao_AdministratorModel::getInstance()->query([]);
 		print_r($admin);
 		ExcelParser::read(APPLICATION_PATH . "/SCS基础数据表.xlsx");
+
+		$competitions = Dao_CompetitionModel::getInstance()->query([]);
+		print_r($competitions);
     }
 
 	public function indexAction($name = "World!") {

@@ -19,6 +19,13 @@ class PlatformController extends JsonControllerAbstract {
      * @return FLASE
      */
 	public function getOverviewAction() {
+        if (!$_SESSION["admin"]) {
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NOT_LOGIN_ERROR);
+            // 设置 response
+		    $this->jsonResponse->setBody($json);
+            return FALSE;
+        }
+        
         $result = APIStatusCode::getOkMsgArray();
 
         $result['result'] = $this->platformService->getPlatformOverview();

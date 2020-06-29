@@ -95,26 +95,24 @@ class ExcelParser
             $school_id = Dao_SchoolModel::getInstance()->queryOne(['school_name'=>$sheetData[$i]["E"]])["_id"];
 
             // 插入 student 基础信息
-            $student_id = $sheetData[$i]["B"];
-            if (Dao_StudentModel::getInstance()->queryOne(['student_id' => $student_id]) == null) {
-                Dao_StudentModel::getInstance()->uniqueInsert([
-                        'student_name'=>$sheetData[$i]["A"], 
-                        'student_id' => $student_id,
-                        'student_grade' => $sheetData[$i]["C"],
-                        'student_sex' => $sheetData[$i]["D"],
-                    ]
-                );
-            }
-            $student_oid = Dao_StudentModel::getInstance()->queryOne(['student_id'=>$sheetData[$i]["B"]])["_id"];
+            $student_id = (string)$sheetData[$i]["B"];
+            Dao_StudentModel::getInstance()->uniqueInsert([
+                    'student_name'=>$sheetData[$i]["A"], 
+                    'student_id' => $student_id,
+                    'student_grade' => $sheetData[$i]["C"],
+                    'student_sex' => $sheetData[$i]["D"],
+                ]
+            );
+            $student_oid = Dao_StudentModel::getInstance()->queryOne(['student_id'=>$student_id])["_id"];
             
             // 插入 competiton 基础信息
             $competition_name = $sheetData[$i]["H"];
-            $competition_sTime = $sheetData[$i]["I"];
+            $competition_sTime = intval($sheetData[$i]["I"]);
             if (Dao_CompetitionModel::getInstance()->queryOne(['competition_name'=>$competition_name, 'competition_start_time'=>$competition_sTime]) == null) {
                 Dao_CompetitionModel::getInstance()->uniqueInsert([
                         'competition_name'=>$competition_name,
                         'competition_start_time'=>$competition_sTime, 
-                        'competition_end_time'=>$sheetData[$i]["J"]
+                        'competition_end_time'=>intval($sheetData[$i]["J"])
                     ]
                 );
             }          
@@ -125,7 +123,7 @@ class ExcelParser
             if (Dao_MatchModel::getInstance()->queryOne(['match_name'=>$match_name, 'match_belong_competition'=>$competition_id]) == null) {
                 Dao_MatchModel::getInstance()->uniqueInsert([
                         'match_name'=>$match_name,
-                        'match_time'=>$sheetData[$i]["G"], 
+                        'match_time'=>intval($sheetData[$i]["G"]), 
                         'match_belong_competition'=>$competition_id
                     ]
                 );
@@ -136,10 +134,10 @@ class ExcelParser
             Dao_AwardModel::getInstance()->uniqueInsert([
                     'competition_object_id'=>$competition_id,
                     'match_object_id'=>$match_id, 
-                    'award_type'=>$sheetData[$i]["L"],
+                    'award_type'=>intval($sheetData[$i]["L"]),
                     'student_object_id'=>$student_oid,
                     'school_object_id'=>$school_id,
-                    'award_rank'=>$sheetData[$i]["K"]
+                    'award_rank'=>intval($sheetData[$i]["K"])
                 ]
             );
             $award_id = Dao_AwardModel::getInstance()->queryOne([
