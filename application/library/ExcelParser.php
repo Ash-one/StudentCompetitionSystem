@@ -35,6 +35,11 @@ class ExcelParser
 
             // TODO: $sheetData[$i]["C"] 年级的转换
 
+            if(!ExcelParser::verifyData($sheetData[$i])){
+                echo "该条导入数据出错";
+                continue;
+            }
+
             // 插入 school 基础信息
             Dao_SchoolModel::getInstance()->uniqueInsert(['school_name'=>$sheetData[$i]["E"]]);
             $school_id = Dao_SchoolModel::getInstance()->queryOne(['school_name'=>$sheetData[$i]["E"]])["_id"];
@@ -114,47 +119,101 @@ class ExcelParser
 
     }
 
+    //判断整个字符串是否匹配正则式的函数
+    public static function pregMatchTotalStr($reg,$str){
+        $is_match = preg_match($reg,$str,$return);
+        if($is_match && strlen($return[0]) == strlen($str)){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    //判断字符串
+    public static function is_Null($str){
+        if($str == ""){
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
     public static function verifyData($dataArray){
-        echo gettype($dataArray['A'])." ";
-        echo gettype($dataArray['B'])." ";
-        echo gettype($dataArray['C'])." ";
-        echo gettype($dataArray['D'])." ";
-        echo gettype($dataArray['E'])." ";
-        echo gettype($dataArray['F'])." ";
-        echo gettype($dataArray['G'])." ";
-        echo gettype($dataArray['H'])." ";
-        echo gettype($dataArray['I'])." ";
-        echo gettype($dataArray['J'])." ";
-        echo gettype($dataArray['K'])." ";
-        echo gettype($dataArray['L'])." ";
+
+        //用于验证的正则式
+        $regStudentID = '([0-9]{5,11})';
+        $regGrade = '(1[1-6]|2[1-3]|3[1-3]|4[1-4])';
+        $regSex = '(0|1)';
+        $regTime = '([0-9]{0,10})';
+        $regAwardRank = '([0-9]{0,})';
+        $regAwardType = '([1-7])';
+
+        if(self::is_Null($dataArray['A'])){
+            echo 1;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regStudentID,$dataArray['B'])){
+            echo 2;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regGrade,$dataArray['C'])){
+            echo 3;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regSex,$dataArray['D'])){
+            echo $dataArray['D'];
+            return false;
+        }
+
+        if(self::is_Null($dataArray['E'])){
+            echo 5;
+            return false;
+        }
+
+        if(self::is_Null($dataArray['F'])){
+            echo 6;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['G'])){
+            echo 7;
+            return false;
+        }
+
+        if(self::is_Null($dataArray['H'])){
+            echo 8;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['I'])){
+            echo 9;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['J'])){
+            echo 10;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regAwardRank,$dataArray['K'])){
+            echo 11;
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regAwardType,$dataArray['L'])){
+            echo 12;
+            return false;
+        }
+
+        return true;
 
     }
 
 }
 
-//require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
-//
-//// Db_Mongodb::dropDatabase();
-//echo dirname(dirname(__DIR__)) . '/SCS基础数据表.xlsx';
-//$spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load(dirname(dirname(__DIR__)) . '/SCS基础数据表.xlsx');
-//// 方法二
-//$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-//
-//for ($i = 2 ; $i<count($sheetData);$i++) {
-//
-//    if ($sheetData[$i]["D"] == "男") {
-//        $sheetData[$i]["D"] = '1';
-//    } elseif ($sheetData[$i]["D"] == "女") {
-//        $sheetData[$i]["D"] = '0';
-//    } else {
-//        echo "sex_error";
-//    }
-//
-//
-//
-//    ExcelParser::verifyData($sheetData[$i]);
-//    break;
-//}
-$regGrade = '(1[1-6]|2[1-3]|3[1-3]|4[1-4])';
-$regSex = '(^1|2$)';
-echo $num = preg_match($regSex,"122");
+
+
