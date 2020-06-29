@@ -35,6 +35,10 @@ class ExcelParser
 
             // TODO: $sheetData[$i]["C"] 年级的转换
 
+            if(!ExcelParser::verifyData($sheetData[$i],$i)){
+                continue;
+            }
+
             // 插入 school 基础信息
             Dao_SchoolModel::getInstance()->uniqueInsert(['school_name'=>$sheetData[$i]["E"]]);
             $school_id = Dao_SchoolModel::getInstance()->queryOne(['school_name'=>$sheetData[$i]["E"]])["_id"];
@@ -115,7 +119,100 @@ class ExcelParser
 
     }
 
+    //判断整个字符串是否匹配正则式的函数
+    public static function pregMatchTotalStr($reg,$str){
+        $is_match = preg_match($reg,$str,$return);
+        if($is_match && strlen($return[0]) == strlen($str)){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
+    //判断字符串是否为空
+    public static function is_Null($str){
+        if($str == ""){
+            return 1;
+        } else {
+            return 0;
+        }
 
+    }
+
+    public static function verifyData($dataArray,$row){
+
+        //用于验证的正则式
+        $regStudentID = '([0-9]{5,11})';
+        $regGrade = '(1[1-6]|2[1-3]|3[1-3]|4[1-4])';
+        $regSex = '(0|1)';
+        $regTime = '([0-9]{0,10})';
+        $regAwardRank = '([0-9]{0,})';
+        $regAwardType = '([1-7])';
+
+        if(self::is_Null($dataArray['A'])){
+            Db_Mongodb::log("row".$row.":name字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regStudentID,$dataArray['B'])){
+            Db_Mongodb::log("row".$row.":student_id字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regGrade,$dataArray['C'])){
+            Db_Mongodb::log("row".$row.":student_grade字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regSex,$dataArray['D'])){
+            Db_Mongodb::log("row".$row.":student_sex字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(self::is_Null($dataArray['E'])){
+            Db_Mongodb::log("row".$row.":school_name字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(self::is_Null($dataArray['F'])){
+            Db_Mongodb::log("row".$row.":match_name字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['G'])){
+            Db_Mongodb::log("row".$row.":match_time字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(self::is_Null($dataArray['H'])){
+            Db_Mongodb::log("row".$row.":competition_name字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['I'])){
+            Db_Mongodb::log("row".$row.":competition_start_time字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regTime,$dataArray['J'])){
+            Db_Mongodb::log("row".$row.":competition_end_time字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regAwardRank,$dataArray['K'])){
+            Db_Mongodb::log("row".$row.":award_rank字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        if(!self::pregMatchTotalStr($regAwardType,$dataArray['L'])){
+            Db_Mongodb::log("row".$row.":award_type字段不符合数据规范,将跳过插入本条记录");
+            return false;
+        }
+
+        return true;
+
+    }
 
 }
+
+

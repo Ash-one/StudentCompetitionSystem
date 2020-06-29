@@ -503,6 +503,65 @@ http://api.gy5461.xyz/students/detail/id/201911143030
 
 ```
 
+接口功能：指定学生的按年份获奖详情  
+接口地址：http://api.gy5461.xyz/students/chart/     
+支持格式：json  
+请求方法：*GET*  
+请求示例：     
+http://api.gy5461.xyz/students/chart/id/201911143030
+     
+
+
+- 请求参数： 
+
+|  参数名称  |  类型     | 必填    | 说明               |
+|   ----    |  :----:  | :----: | ----               |
+|   id      |  string  |   Y    |  学生id             |
+
+
+- 响应内容： 
+
+|   参数名称        |   类型      | 说明           |
+|   ----           |   :----:   | ----          |
+|   year           |   string   |  年份          |
+|   num_cmpts      |   int      |  总参赛次数     |
+|   num_matchs     |   int      |  总参与项目次数  |
+|   num_awards     |   int      |  总获奖次数      |
+|   num_aw_person  |   int      |  总个人奖数      |
+|   num_aw_group   |   int      |  总团体奖数      |
+
+- JSON响应示例:
+```
+{
+    "status" : "0",
+    "msg"    : "ok",
+    "result" :[
+        {
+            "year"           : "2020",
+            "num_cmpts"      : 23 ,
+            "num_stus"       : 80 ,
+            "num_awards"     : 80,
+            "num_matchs"     : 80,
+            "num_aw_person"  : 40,
+            "num_aw_group"   : 40,
+        },
+        {
+            "year"           : "2019",
+            "num_cmpts"      : 30 ,
+            "num_stus"       : 100 ,
+            "num_awards"     : 120,
+            "num_matchs"     : 40,
+            "num_aw_person"  : 80,
+            "num_aw_group"   : 40,
+        }
+        ]
+    }
+}
+```
+
+
+
+
 
 ----
 ## 学校数据

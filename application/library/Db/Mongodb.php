@@ -416,7 +416,7 @@ abstract class Db_Mongodb {
      * @param  string $msg [description]
      * @return [type]      [description]
      */
-    protected static function log($msg = '') {
+    public static function log($msg = '') {
         $file = 'mongodb_error_' . date('Y-m-d');
         $line = '===================' . date('Y-m-d H:i:s') . '===================';
         Log::writeLog($file, $line, '');
