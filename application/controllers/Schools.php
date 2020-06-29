@@ -19,6 +19,13 @@ class SchoolsController extends JsonControllerAbstract {
      * @return FLASE
      */
 	public function getOverviewAction() {
+        if (!$_SESSION["admin"]) {
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NOT_LOGIN_ERROR);
+            // 设置 response
+		    $this->jsonResponse->setBody($json);
+            return FALSE;
+        }
+
         $result = APIStatusCode::getOkMsgArray();
 
         $result['result'] = $this->schoolService->getSchoolOverview();
@@ -43,6 +50,13 @@ class SchoolsController extends JsonControllerAbstract {
      * @return FLASE
      */
     public function getInfoAction() {
+        if (!$_SESSION["admin"]) {
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NOT_LOGIN_ERROR);
+            // 设置 response
+		    $this->jsonResponse->setBody($json);
+            return FALSE;
+        }
+
         $result = APIStatusCode::getOkMsgArray();
         
         // 获取参数   
@@ -85,6 +99,13 @@ class SchoolsController extends JsonControllerAbstract {
      * @return FLASE
      */
     public function getDetailAction() {
+        if (!$_SESSION["admin"]) {
+            $json = APIStatusCode::getErrorMsgJson(APIStatusCode::NOT_LOGIN_ERROR);
+            // 设置 response
+		    $this->jsonResponse->setBody($json);
+            return FALSE;
+        }
+        
         $result = APIStatusCode::getOkMsgArray();
         
         // 获取参数
