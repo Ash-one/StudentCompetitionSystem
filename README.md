@@ -42,7 +42,7 @@ location ~ \.php$ {
 
 ~~~ini
 # $YOUR_PATH 为 StudentCompetitionSystem 所在的绝对路径(nginx安装路径)
-root $YOUR_PATH/html/dist/;
+root $YOUR_PATH/StudentCompetitionSystem/web/dist/;
 
 index index.html index.htm;
 ~~~
