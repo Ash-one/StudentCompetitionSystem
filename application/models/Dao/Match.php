@@ -23,19 +23,6 @@ class Dao_MatchModel extends Db_Mongodb {
             'match_belong_competition'=>''
         ];
 
-//        if($this->count() == 0){
-//            //空集合插入记录
-//            $this->insert(["match_name"=>"仰卧起坐（大学组）", "match_time"=>"1580886000", "match_student_details"=>[],
-//                "match_belong_competition"=>""]);
-//        }
-
-        //查询结果
-        // $filter = [];
-        // $result = $this->query($filter);
-        // foreach ($result as $document) {
-        //     print_r($document);
-        // }
-
     }
 
     public static function getInstance() {

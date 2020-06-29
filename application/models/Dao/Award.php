@@ -24,19 +24,6 @@ class Dao_AwardModel extends Db_Mongodb {
             'school_object_id'=>'',
             'award_rank'=>''
         ];
-
-//        if($this->count() == 0) {
-//            //空集合插入记录
-//            $this->insert(["competition_object_id"=>"", "match_object_id"=>"", "award_type"=>1,
-//                "student_object_id"=>"", "school_object_id"=>"", "award_rank"=>1]);
-//        }
-
-        //查询结果
-        // $filter = [];
-        // $result = $this->query($filter);
-        // foreach ($result as $document) {
-        //     print_r($document);
-        // }
     }
 
     public static function getInstance() {
